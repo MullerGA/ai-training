@@ -1,8 +1,8 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="fr">
 <head>
 <meta charset="utf-8"/>
-<title>Magora — Learner UI Kit</title>
+<title>AI TRAINING â€” Learner UI Kit</title>
 <link rel="stylesheet" href="../../colors_and_type.css"/>
 <link rel="stylesheet" href="styles.css"/>
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
@@ -27,15 +27,15 @@
       { id: 'dashboard',  label: 'Dashboard',    icon: 'home',    comp: () => <Dashboard/> },
       { id: 'catalog',    label: 'Catalogue',    icon: 'compass', comp: () => <Catalog/> },
       { id: 'path',       label: 'Parcours',     icon: 'layers',  comp: () => <Path/> },
-      { id: 'lesson',     label: 'Leçon',        icon: 'play',    comp: () => <Lesson/> },
+      { id: 'lesson',     label: 'LeÃ§on',        icon: 'play',    comp: () => <Lesson/> },
       { id: 'exercise',   label: 'Exercice',     icon: 'target',  comp: () => <Exercise/> },
       { id: 'progress',   label: 'Progression',  icon: 'chart',   comp: () => <Progress2/> },
       { id: 'onboarding', label: 'Onboarding',   icon: 'sparkles',comp: () => <Onboarding/> },
     ];
 
     function App() {
-      const [cur, setCur] = React.useState(() => localStorage.getItem('magora.screen') || 'dashboard');
-      React.useEffect(() => { localStorage.setItem('magora.screen', cur); }, [cur]);
+      const [cur, setCur] = React.useState(() => localStorage.getItem('ai-training.screen') || 'dashboard');
+      React.useEffect(() => { localStorage.setItem('ai-training.screen', cur); }, [cur]);
       const s = SCREENS.find(x => x.id === cur) || SCREENS[0];
       return (
         <div className="app" data-screen-label={s.label}>
@@ -53,7 +53,7 @@
               })}
               <div className="nav-title" style={{ marginTop: 28 }}>Aide</div>
               <div className="nav-item"><Icon.messageQ/> Questions ?</div>
-              <div className="nav-item"><Icon.settings/> Paramètres</div>
+              <div className="nav-item"><Icon.settings/> ParamÃ¨tres</div>
             </div>
             <div className="screen-content">
               <div style={{ padding: '32px 0' }}>{s.comp()}</div>

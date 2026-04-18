@@ -1,22 +1,22 @@
-// Onboarding — quelques étapes pour définir le parcours
+﻿// Onboarding â€” quelques Ã©tapes pour dÃ©finir le parcours
 const Onboarding = () => {
   const [step, setStep] = React.useState(1);
   const total = 4;
 
   const roles = [
     "Manager",
-    "Opérations",
-    "Rédaction / communication",
+    "OpÃ©rations",
+    "RÃ©daction / communication",
     "Commercial",
     "Support",
     "Autre",
   ];
   const goals = [
-    "Gagner du temps sur mes tâches récurrentes",
-    "Mieux rédiger et synthétiser",
+    "Gagner du temps sur mes tÃ¢ches rÃ©currentes",
+    "Mieux rÃ©diger et synthÃ©tiser",
     "Analyser des documents",
     "Automatiser une partie de mon travail",
-    "Former mon équipe",
+    "Former mon Ã©quipe",
   ];
 
   const [role, setRole] = React.useState(null);
@@ -41,16 +41,16 @@ const Onboarding = () => {
         ))}
       </div>
       <div className="ds-caption" style={{ marginBottom: 10 }}>
-        ÉTAPE {step} SUR {total}
+        Ã‰TAPE {step} SUR {total}
       </div>
 
       {step === 1 && (
         <>
           <h1 className="page-title" style={{ marginBottom: 8 }}>
-            Bienvenue sur Magora.
+            Bienvenue sur AI TRAINING.
           </h1>
           <p className="page-lead" style={{ marginBottom: 32 }}>
-            On prend 2 minutes pour personnaliser ton parcours. Rassure-toi : rien n'est définitif,
+            On prend 2 minutes pour personnaliser ton parcours. Rassure-toi : rien n'est dÃ©finitif,
             tu pourras tout ajuster plus tard.
           </p>
           <Card>
@@ -63,7 +63,7 @@ const Onboarding = () => {
                   3 questions rapides
                 </div>
                 <div className="ds-caption">
-                  On te proposera un parcours adapté à ton rôle et tes objectifs.
+                  On te proposera un parcours adaptÃ© Ã  ton rÃ´le et tes objectifs.
                 </div>
               </div>
             </CardBody>
@@ -74,10 +74,10 @@ const Onboarding = () => {
       {step === 2 && (
         <>
           <h1 className="page-title" style={{ marginBottom: 8 }}>
-            Quel est ton rôle dans l'entreprise ?
+            Quel est ton rÃ´le dans l'entreprise ?
           </h1>
           <p className="page-lead" style={{ marginBottom: 24 }}>
-            Ça nous aide à choisir les exemples les plus pertinents.
+            Ã‡a nous aide Ã  choisir les exemples les plus pertinents.
           </p>
           <div className="grid grid-2">
             {roles.map((r) => (
@@ -107,7 +107,7 @@ const Onboarding = () => {
             Qu'aimerais-tu accomplir ?
           </h1>
           <p className="page-lead" style={{ marginBottom: 24 }}>
-            Sélectionne un ou plusieurs objectifs. Tu peux toujours les modifier.
+            SÃ©lectionne un ou plusieurs objectifs. Tu peux toujours les modifier.
           </p>
           <div className="v-stack gap-2">
             {goals.map((g) => {
@@ -172,11 +172,11 @@ const Onboarding = () => {
               <Icon.sparkles size={28} />
             </div>
             <h1 className="page-title" style={{ marginBottom: 8 }}>
-              Ton parcours est prêt.
+              Ton parcours est prÃªt.
             </h1>
             <p className="page-lead" style={{ margin: "0 auto 28px", maxWidth: 480 }}>
-              On t'a sélectionné <strong style={{ color: "var(--slate-900)" }}>4 modules</strong>{" "}
-              pour démarrer, environ 1h15 au total. Tu peux commencer quand tu veux.
+              On t'a sÃ©lectionnÃ© <strong style={{ color: "var(--slate-900)" }}>4 modules</strong>{" "}
+              pour dÃ©marrer, environ 1h15 au total. Tu peux commencer quand tu veux.
             </p>
           </div>
           <Card>
@@ -187,9 +187,9 @@ const Onboarding = () => {
                 </IconFrame>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontWeight: 600, color: "var(--slate-900)" }}>
-                    Fondamentaux de l'IA générative
+                    Fondamentaux de l'IA gÃ©nÃ©rative
                   </div>
-                  <div className="ds-caption">4 modules · 1h15 · niveau débutant</div>
+                  <div className="ds-caption">4 modules Â· 1h15 Â· niveau dÃ©butant</div>
                 </div>
               </div>
             </CardBody>

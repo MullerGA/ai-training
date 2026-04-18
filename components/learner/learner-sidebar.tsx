@@ -1,0 +1,64 @@
+﻿import {
+  BookOpen,
+  Compass,
+  Home,
+  Layers,
+  PlayCircle,
+  Settings,
+  Target,
+  TrendingUp,
+} from "lucide-react";
+import Link from "next/link";
+
+const nav = [
+  { href: "/learner/dashboard", label: "Dashboard", icon: Home },
+  { href: "/learner/catalogue", label: "Catalogue", icon: Compass },
+  { href: "/learner/parcours", label: "Parcours", icon: Layers },
+  { href: "/learner/lecon", label: "LeÃ§on", icon: PlayCircle },
+  { href: "/learner/exercice", label: "Exercice", icon: Target },
+  { href: "/learner/progression", label: "Progression", icon: TrendingUp },
+] as const;
+
+export function LearnerSidebar() {
+  return (
+    <aside className="hidden border-r border-[var(--slate-200)] bg-white p-3 lg:sticky lg:top-0 lg:block lg:h-[calc(100vh-64px)] lg:overflow-y-auto">
+      <p className="px-3 py-2 text-[10px] font-semibold tracking-[0.08em] text-[var(--slate-400)] uppercase">
+        Parcours learner
+      </p>
+      <nav className="space-y-1">
+        {nav.map(({ href, label, icon: Icon }) => {
+          return (
+            <Link
+              key={href}
+              href={href}
+              className="focus-ring flex items-center gap-2 rounded-md px-3 py-2 text-sm text-[var(--slate-600)] transition-colors hover:bg-[var(--slate-100)] hover:text-[var(--slate-900)]"
+            >
+              <Icon className="size-4" />
+              {label}
+            </Link>
+          );
+        })}
+      </nav>
+
+      <p className="mt-7 px-3 py-2 text-[10px] font-semibold tracking-[0.08em] text-[var(--slate-400)] uppercase">
+        Aide
+      </p>
+      <div className="space-y-1">
+        <button
+          type="button"
+          className="focus-ring flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm text-[var(--slate-600)] hover:bg-[var(--slate-100)] hover:text-[var(--slate-900)]"
+        >
+          <BookOpen className="size-4" />
+          Questions ?
+        </button>
+        <button
+          type="button"
+          className="focus-ring flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm text-[var(--slate-600)] hover:bg-[var(--slate-100)] hover:text-[var(--slate-900)]"
+        >
+          <Settings className="size-4" />
+          ParamÃ¨tres
+        </button>
+      </div>
+    </aside>
+  );
+}

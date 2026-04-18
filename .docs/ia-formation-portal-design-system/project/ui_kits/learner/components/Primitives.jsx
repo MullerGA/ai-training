@@ -1,4 +1,4 @@
-// Shared UI primitives
+﻿// Shared UI primitives
 const Button = ({
   variant = "primary",
   size,
@@ -64,7 +64,7 @@ const Navbar = () => (
   <div className="navbar">
     <div className="brand">
       <div className="brand-badge">AI</div>
-      <img className="brand-logo" src="../../assets/magora-logo-white.svg" alt="Magora" />
+      <img className="brand-logo" src="../../assets/ai-training-logo-white.svg" alt="AI TRAINING" />
     </div>
     <div className="actions">
       <Button variant="ghost-light" icon={<Icon.bookOpen />}>
