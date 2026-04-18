@@ -1,7 +1,7 @@
 # Plan d'évolution AI Training
 
 Date : 2026-04-18
-Statut : Lot 0 livré et validé (2026-04-18)
+Statut : Lot 1 livré et validé (2026-04-18)
 
 ## 1. Objectif
 
@@ -234,13 +234,13 @@ Objectif : base propre avant d'ajouter quoi que ce soit.
 - ✅ `docs/product/routes-and-flows.md`, `architecture.md`, `content-model.md` mis à jour.
 - ✅ **Critère d'acceptation** : `npm run build` ✅ · `npm run lint` ✅ · aucune route orpheline.
 
-### Lot 1 — Modèle de contenu + persistance
+### Lot 1 — Modèle de contenu + persistance ✅ livré et validé
 
-- Créer `lib/content/types.ts` et `lib/content/index.ts` selon §6.
-- Créer `lib/content/parcours/le-monde-de-l-ia.ts` avec **une version squelette** (titres, intros vides à remplir par le propriétaire) alignée sur §5 : 3 modules (Évolution & maturité / Iceberg / Acteurs).
-- Créer `lib/storage/learner-state.ts` + hook `useLearnerState` (§7).
-- Helpers : `markModuleComplete(key)`, `setModuleProgress(key, value)`, `getProgress(parcoursSlug)` (% global du parcours).
-- **Critère d'acceptation** : types exportés, squelette du parcours 1 consommable, état persistant entre reloads.
+- ✅ `lib/content/types.ts` : types `Parcours`, `Module`, `ModuleSection`, `InteractiveWidget` (union exhaustive des 14 widgets du catalogue).
+- ✅ `lib/content/parcours/le-monde-de-l-ia.ts` : squelette Parcours 1, 3 modules (Évolution & maturité / Iceberg / Acteurs), structure intro → concept → interactif → exercice → récap, placeholders `TODO: [propriétaire]`.
+- ✅ `lib/content/index.ts` : `allParcours`, `getParcours(slug)`, `getModule(parcoursSlug, moduleSlug)`.
+- ✅ `lib/storage/learner-state.ts` : type `LearnerState`, clé `ai-training:state:v1`, `useLearnerState()` hook, helpers `markModuleComplete`, `setModuleProgress`, `setLastVisited`, `getParcoursProgress`.
+- ✅ **Critère d'acceptation** : types exportés, squelette du parcours 1 consommable, état persistant entre reloads.
 
 ### Lot 2 — Landing publique + navigation
 
