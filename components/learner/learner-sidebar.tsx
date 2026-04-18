@@ -1,4 +1,5 @@
 ﻿import {
+  Beaker,
   BookOpen,
   Compass,
   Home,
@@ -10,14 +11,17 @@
 } from "lucide-react";
 import Link from "next/link";
 
-const nav = [
-  { href: "/learner/dashboard", label: "Dashboard", icon: Home },
-  { href: "/learner/catalogue", label: "Catalogue", icon: Compass },
-  { href: "/learner/parcours", label: "Parcours", icon: Layers },
-  { href: "/learner/lecon", label: "LeÃ§on", icon: PlayCircle },
-  { href: "/learner/exercice", label: "Exercice", icon: Target },
-  { href: "/learner/progression", label: "Progression", icon: TrendingUp },
-] as const;
+import { learnerNavItems } from "@/lib/learner/data";
+
+const iconByHref = {
+  "/learner/dashboard": Home,
+  "/learner/catalogue": Compass,
+  "/learner/parcours": Layers,
+  "/learner/lecon": PlayCircle,
+  "/learner/exercice": Target,
+  "/learner/lab": Beaker,
+  "/learner/progression": TrendingUp,
+} as const;
 
 export function LearnerSidebar() {
   return (
@@ -26,7 +30,9 @@ export function LearnerSidebar() {
         Parcours learner
       </p>
       <nav className="space-y-1">
-        {nav.map(({ href, label, icon: Icon }) => {
+        {learnerNavItems.map(({ href, label }) => {
+          const Icon = iconByHref[href];
+
           return (
             <Link
               key={href}
@@ -56,7 +62,7 @@ export function LearnerSidebar() {
           className="focus-ring flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm text-[var(--slate-600)] hover:bg-[var(--slate-100)] hover:text-[var(--slate-900)]"
         >
           <Settings className="size-4" />
-          ParamÃ¨tres
+          Paramètres
         </button>
       </div>
     </aside>

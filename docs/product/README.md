@@ -30,3 +30,4 @@ AI TRAINING est une application de formation IA centrée sur le parcours apprena
 - [Routes et parcours](./routes-and-flows.md)
 - [Système UI](./ui-system.md)
 - [Modèle de contenu](./content-model.md)
+- [Audit de migration](./migration-audit.md)

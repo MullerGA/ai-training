@@ -1,17 +1,23 @@
-"use client";
+﻿"use client";
 
 import { ArrowRight, CheckCircle2, ChevronRight, Clock3, Lightbulb } from "lucide-react";
-import { useState } from "react";
-
+import { useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  learnerExerciceBrief,
+  learnerExerciceHints,
+  learnerPromptTemplates,
+} from "@/lib/learner/data";
 
 export function ExerciceScreen() {
   const [answer, setAnswer] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [showTemplate, setShowTemplate] = useState(false);
 
   const wordCount = answer.trim().split(/\s+/).filter(Boolean).length;
+  const highlightedTemplate = useMemo(() => learnerPromptTemplates[0], []);
 
   return (
     <div className="grid w-full gap-6 px-4 py-8 md:px-6 xl:grid-cols-[1fr_300px] xl:px-8">
@@ -46,8 +52,7 @@ export function ExerciceScreen() {
             <p className="text-caption">Le brief reçu par email</p>
           </div>
           <div className="bg-[var(--slate-50)] p-5 font-mono text-sm leading-relaxed text-[var(--slate-700)]">
-            "Salut, tu peux me faire un petit résumé du dernier rapport RH pour la réu de jeudi ?
-            Merci."
+            "{learnerExerciceBrief}"
           </div>
         </article>
 
@@ -77,10 +82,26 @@ export function ExerciceScreen() {
           <Button variant="gradient" onClick={() => setSubmitted(true)} disabled={wordCount < 5}>
             Valider ma réponse
           </Button>
-          <Button variant="outline">Voir un exemple</Button>
+          <Button variant="outline" onClick={() => setShowTemplate((prev) => !prev)}>
+            {showTemplate ? "Masquer l'exemple" : "Voir un exemple"}
+          </Button>
           <span className="grow" />
           <Button variant="ghost">Passer</Button>
         </div>
+
+        {showTemplate ? (
+          <article className="panel-card p-4">
+            <p className="text-xs font-semibold uppercase tracking-wide text-[var(--blue-700)]">
+              Template recommandé · {highlightedTemplate.title}
+            </p>
+            <p className="mt-2 text-sm text-[var(--slate-700)]">
+              {highlightedTemplate.description}
+            </p>
+            <pre className="mt-3 overflow-x-auto rounded-md bg-[var(--slate-50)] p-3 text-xs text-[var(--slate-700)]">
+              {highlightedTemplate.prompt}
+            </pre>
+          </article>
+        ) : null}
 
         {submitted ? (
           <article className="panel-card flex items-start gap-3 bg-[#f0fdf4] p-4">
@@ -107,12 +128,7 @@ export function ExerciceScreen() {
           <p className="text-caption">À utiliser en cas de besoin</p>
         </div>
         <div className="space-y-2 p-4">
-          {[
-            ["Rôle", "Qui doit répondre ? Analyste ? Rédacteur ?"],
-            ["Contexte", "Pour qui ? Quelle occasion ? Quel enjeu ?"],
-            ["Tâche", "Action précise et verbe d'action."],
-            ["Format", "Longueur, structure, ton, exemples."],
-          ].map(([label, hint]) => (
+          {learnerExerciceHints.map(([label, hint]) => (
             <div
               key={label}
               className="rounded-lg border border-[var(--slate-200)] bg-[var(--slate-50)] p-3"

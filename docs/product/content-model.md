@@ -5,21 +5,29 @@
 Définis dans `lib/learner/types.ts`:
 
 - `LearnerStatus`: `done | current | next | locked`
+- `LearningObjective`
+- `FundamentalConcept`
+- `TimelineMilestone`
+- `PromptTemplate`
+- `ConversationState`
+- `LabScenario`
 - `LearnerModule`
 - `LearnerCourse`
 - `LearnerChapter`
 - `LearnerProgress`
+- `LearnerRecommendation`
 
 ## Données actuelles
 
 Définies dans `lib/learner/data.ts`:
 
-- `learnerNavItems`
-- `dashboardModules`
-- `catalogueCategories`
-- `catalogueCourses`
-- `pathChapters`
-- `learnerProgress`
+- Navigation et parcours: `learnerNavItems`, `dashboardModules`, `pathChapters`
+- Catalogue: `catalogueCategories`, `catalogueCourses`
+- Fondamentaux: `learnerFundamentalConcepts`, `learnerTimeline`
+- Contexte/mémoire: `learnerContextScenarios`
+- Lab: `learnerLabScenarios`, `learnerPromptTemplates`
+- Exercice: `learnerExerciceBrief`, `learnerExerciceHints`
+- Progression: `learnerProgress`, `learnerRecommendations`
 
 ## Logique fonctionnelle locale
 
@@ -30,6 +38,9 @@ Définies dans `lib/learner/data.ts`:
   - compteur de mots
   - activation conditionnelle de validation
   - feedback après soumission
+- Lab interactif:
+  - calcul déterministe de distribution via `runFunnel`
+  - étapes explicites: `temperature` -> `top-k` -> `top-p`
 - Progression:
   - série hebdomadaire calculée à partir d'un tableau de minutes
 

@@ -10,12 +10,7 @@ export function LearnerNavbar() {
           <div className="bg-learner-gradient inline-flex size-8 items-center justify-center rounded-lg text-xs font-extrabold tracking-wide text-white">
             AI
           </div>
-          <svg
-            role="img"
-            aria-label="AI TRAINING"
-            viewBox="0 0 280 36"
-            className="h-[22px] w-auto"
-          >
+          <svg role="img" aria-label="AI TRAINING" viewBox="0 0 280 36" className="h-[22px] w-auto">
             <defs>
               <linearGradient id="ai-training-wordmark" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stopColor="#60A5FA" />

@@ -1,8 +1,8 @@
-import { ArrowRight, BookOpen, Clock3, Flag, Sparkles, Target } from "lucide-react";
+﻿import { ArrowRight, BookOpen, Clock3, Flag, Sparkles, Target } from "lucide-react";
 
 import { KpiCard } from "@/components/learner/kpi-card";
 import { Progress } from "@/components/ui/progress";
-import { learnerProgress } from "@/lib/learner/data";
+import { learnerProgress, learnerRecommendations } from "@/lib/learner/data";
 
 export function ProgressionScreen() {
   const max = Math.max(...learnerProgress.weeklyMinutes);
@@ -90,13 +90,9 @@ export function ProgressionScreen() {
             <p className="text-caption">Basé sur tes modules validés</p>
           </div>
           <div className="space-y-2 p-5">
-            {[
-              ["Prompting avancé", "Suite naturelle du module en cours"],
-              ["Cas d'usage rédaction", "Applique ce que tu viens d'apprendre"],
-              ["Quiz récap module 1", "Consolide tes bases en 5 min"],
-            ].map(([title, description]) => (
+            {learnerRecommendations.map((recommendation) => (
               <button
-                key={title}
+                key={recommendation.id}
                 type="button"
                 className="focus-ring flex w-full items-center gap-3 rounded-lg border border-[var(--slate-200)] p-3 text-left hover:bg-[var(--slate-50)]"
               >
@@ -105,9 +101,9 @@ export function ProgressionScreen() {
                 </span>
                 <span className="flex-1">
                   <span className="block text-sm font-semibold text-[var(--slate-900)]">
-                    {title}
+                    {recommendation.title}
                   </span>
-                  <span className="text-caption">{description}</span>
+                  <span className="text-caption">{recommendation.description}</span>
                 </span>
                 <ArrowRight className="size-4 text-[var(--slate-400)]" />
               </button>

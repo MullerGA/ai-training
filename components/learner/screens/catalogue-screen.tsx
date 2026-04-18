@@ -66,9 +66,7 @@ export function CatalogueScreen() {
               </div>
               {course.tag ? (
                 <div className="absolute top-3 right-3">
-                  <Badge variant={course.progress === 100 ? "success" : "info"}>
-                    {course.tag}
-                  </Badge>
+                  <Badge variant={course.progress === 100 ? "success" : "info"}>{course.tag}</Badge>
                 </div>
               ) : null}
             </div>

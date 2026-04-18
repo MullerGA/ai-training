@@ -2,11 +2,12 @@
 
 ## Vue d'ensemble
 
-Le produit suit une architecture simple en 3 couches:
+Le produit suit une architecture simple en 4 couches:
 
 1. Routing et layouts: `app/`
 2. UI métier: `components/learner/`
 3. Données et types: `lib/learner/`
+4. Logique métier pure (lab): `lib/learner/funnel.ts`
 
 ## Routing
 
@@ -35,8 +36,9 @@ La route `/` redirige vers `/learner/dashboard`.
 
 ## Données
 
-- `lib/learner/types.ts`: contrat métier TypeScript.
-- `lib/learner/data.ts`: contenu mocké (modules, parcours, progression, catalogue).
+- `lib/learner/types.ts`: contrats métier TypeScript.
+- `lib/learner/data.ts`: contenu local structuré (fondamentaux, contexte, lab, progression).
+- `lib/learner/funnel.ts`: logique déterministe temperature/top-k/top-p.
 
 ## Interactivité
 
@@ -44,4 +46,5 @@ Client Components uniquement quand nécessaire:
 
 - `catalogue-screen.tsx` (filtre recherche/catégorie)
 - `exercice-screen.tsx` (saisie réponse, validation)
+- `lab-screen.tsx` (contrôles et visualisation entonnoir)
 - `lesson-player.tsx` (contrôles lecteur)
