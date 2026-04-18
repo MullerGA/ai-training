@@ -7,6 +7,7 @@
 ## Routes learner
 
 - `/learner/dashboard`
+- `/learner/diagrammes`
 - `/learner/catalogue`
 - `/learner/parcours`
 - `/learner/lecon`

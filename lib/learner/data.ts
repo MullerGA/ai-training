@@ -13,6 +13,7 @@
 
 export const learnerNavItems = [
   { href: "/learner/dashboard", label: "Dashboard" },
+  { href: "/learner/diagrammes", label: "Diagrammes" },
   { href: "/learner/catalogue", label: "Catalogue" },
   { href: "/learner/parcours", label: "Parcours" },
   { href: "/learner/lecon", label: "Leçon" },

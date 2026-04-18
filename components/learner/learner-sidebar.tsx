@@ -1,10 +1,21 @@
-﻿import { Beaker, Compass, Home, Info, Layers, PlayCircle, Target, TrendingUp } from "lucide-react";
+﻿import {
+  Beaker,
+  Compass,
+  Home,
+  Info,
+  Layers,
+  PlayCircle,
+  Target,
+  TrendingUp,
+  Workflow,
+} from "lucide-react";
 import Link from "next/link";
 
 import { learnerNavItems } from "@/lib/learner/data";
 
 const iconByHref = {
   "/learner/dashboard": Home,
+  "/learner/diagrammes": Workflow,
   "/learner/catalogue": Compass,
   "/learner/parcours": Layers,
   "/learner/lecon": PlayCircle,
