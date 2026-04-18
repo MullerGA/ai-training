@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin:0; padding:24px; background:#fff; font-family: var(--font-sans); }
+  .grp + .grp { margin-top: 14px; }
+  label { display:block; font-size:13px; font-weight:500; color:#0f172a; margin-bottom:6px; }
+  input, textarea, select { width: 100%; box-sizing:border-box; font-family: inherit; font-size: 14px; padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 6px; background: white; color: #0f172a; transition: border 150ms, box-shadow 150ms; }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgb(59 130 246 / 0.15); }
+  input::placeholder { color: #94a3b8; }
+  textarea { min-height: 72px; resize: vertical; }
+  .help { font-size: 11px; color: #64748b; margin-top: 4px; }
+  .err { font-size: 11px; color: #dc2626; margin-top: 4px; }
+  .err-input { border-color: #ef4444; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+</style>
+</head>
+<body>
+  <div class="row2">
+    <div class="grp">
+      <label>Prénom</label>
+      <input placeholder="Camille" />
+    </div>
+    <div class="grp">
+      <label>Équipe</label>
+      <select><option>Marketing</option><option>Ops</option></select>
+    </div>
+  </div>
+  <div class="grp" style="margin-top:14px">
+    <label>Question à l'IA</label>
+    <textarea placeholder="Pose ta question…"></textarea>
+    <div class="help">Sois précis·e pour une meilleure réponse.</div>
+  </div>
+  <div class="grp">
+    <label>Email professionnel</label>
+    <input class="err-input" value="camille@exemple" />
+    <div class="err">Email incomplet — ajoute le domaine.</div>
+  </div>
+</body>
+</html>

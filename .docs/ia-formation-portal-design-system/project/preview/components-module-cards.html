@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin:0; padding:24px; background:#fff; font-family: var(--font-sans); display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .card { background:white; border:1px solid #e2e8f0; border-radius:10px; padding: 16px; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+  .card:hover { box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.06); }
+  .ic { width: 36px; height: 36px; border-radius: 9px; background: #eff6ff; color: #2563eb; display:inline-flex; align-items:center; justify-content:center; margin-bottom: 10px; }
+  .ic svg { width: 18px; height: 18px; stroke-width: 2; }
+  .t { font-size: 14px; font-weight: 600; color: #0f172a; margin: 0 0 4px 0; }
+  .d { font-size: 12px; color: #64748b; margin: 0; line-height: 1.5; }
+  .meta { margin-top: 12px; padding-top: 12px; border-top: 1px solid #f1f5f9; display:flex; justify-content: space-between; font-size: 11px; color: #64748b; }
+  .chip { font-size: 10px; font-weight: 600; color: #15803d; background: #dcfce7; padding: 2px 6px; border-radius: 9999px; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg></div>
+    <div class="t">Introduction aux LLM</div>
+    <div class="d">Les concepts fondamentaux des modèles de langage.</div>
+    <div class="meta"><span>4 leçons · 45 min</span><span class="chip">En cours</span></div>
+  </div>
+  <div class="card">
+    <div class="ic" style="background:#fef3c7;color:#a16207"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M15 4V2m0 14v-2M8 9h2M20 9h2m-6.9 3.9L16 15m-6-6-1.9-1.9"/><circle cx="9" cy="15" r="3"/></svg></div>
+    <div class="t">Techniques de prompting</div>
+    <div class="d">Apprends à formuler des demandes précises et efficaces.</div>
+    <div class="meta"><span>6 leçons · 1h10</span><span style="color:#94a3b8">Non commencé</span></div>
+  </div>
+  <div class="card">
+    <div class="ic" style="background:#dcfce7;color:#15803d"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+    <div class="t">Applications concrètes</div>
+    <div class="d">Mise en pratique avec tes cas d'usage métier.</div>
+    <div class="meta"><span>3 leçons · 30 min</span><span class="chip">Terminé</span></div>
+  </div>
+</body>
+</html>
