@@ -1,20 +1,21 @@
-# Routes et Parcours — état Lot 0
+# Routes et Parcours — état Lot 3
 
 ## Routes actives
 
 | Route | Description |
 |---|---|
-| `/` | Redirection vers `/lab` (landing publique à venir — Lot 2) |
+| `/` | Landing publique (hero, 3 promesses, aperçu parcours, footer) |
+| `/formations` | Grille des parcours avec progression localStorage |
+| `/formations/[parcoursSlug]` | Détail parcours (header, modules, barre progression, CTA reprendre) |
+| `/formations/[parcoursSlug]/[moduleSlug]` | Placeholder module (remplacé Lot 4) |
 | `/lab` | Entonnoir de décision LLM (lab interactif autonome) |
 | `/a-propos` | Présentation de l'application |
 | `/progression` | Suivi de progression (placeholder — fonctionnel Lot 7) |
 
 ## Routes supprimées (Lot 0)
 
-Les routes suivantes ont été supprimées car elles correspondent à un POC non retenu :
-
-- `/learner/dashboard` — fusionné dans landing + progression (Lot 2 / Lot 7)
-- `/learner/catalogue` — remplacé par `/formations` (Lot 3)
+- `/learner/dashboard` — fusionné dans landing + progression
+- `/learner/catalogue` — remplacé par `/formations`
 - `/learner/parcours` — remplacé par `/formations/[parcoursSlug]` (Lot 3)
 - `/learner/lecon` — absorbé dans `/formations/[parcoursSlug]/[moduleSlug]` (Lot 4)
 - `/learner/exercice` — absorbé dans `/formations/[parcoursSlug]/[moduleSlug]` (Lot 4)
@@ -24,15 +25,13 @@ Les routes suivantes ont été supprimées car elles correspondent à un POC non
 
 | Route | Lot | Description |
 |---|---|---|
-| `/` | Lot 2 | Landing publique (hero, parcours, CTA) |
-| `/formations` | Lot 3 | Liste des parcours avec progression |
-| `/formations/[parcoursSlug]` | Lot 3 | Détail d'un parcours |
-| `/formations/[parcoursSlug]/[moduleSlug]` | Lot 4 | Écran module unifié |
+| `/formations/[parcoursSlug]/[moduleSlug]` | Lot 4 | Écran module unifié (remplace le placeholder) |
 | `/prompts` | Lot 6 | Bibliothèque de prompts réutilisables |
-| `/progression` | Lot 7 | Progression réelle depuis localStorage |
 
 ## Navigation
 
-- Navbar globale dans `app/layout.tsx` (fixe, dark).
-- Liens actifs : Lab · Progression · À propos.
-- Refonte navbar complète prévue au Lot 2.
+- Navbar globale dans `app/layout.tsx` (fixe, dark, Server Component).
+- Composant dropdown "Annexes" (`components/learner/annexes-menu.tsx`) : Client Component.
+- Liens navbar : **Formations** · **Annexes** (menu → Prompts, Lab) · **Progression** · **À propos**.
+- Logo → `/` (accueil).
+- Pas de sidebar persistante globale ; sidebar contextuelle prévue uniquement dans l'écran module (Lot 4).

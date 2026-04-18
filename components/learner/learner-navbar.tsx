@@ -1,13 +1,14 @@
-import { Beaker, Info, TrendingUp } from "lucide-react";
+import { GraduationCap, Info, TrendingUp } from "lucide-react";
 import Link from "next/link";
+import { AnnexesMenu } from "./annexes-menu";
 
 export function LearnerNavbar() {
   return (
     <header className="fixed top-0 z-50 h-16 w-full border-b border-white/10 bg-[var(--slate-900)] backdrop-blur-sm">
       <div className="flex h-full w-full items-center justify-between px-4 md:px-8">
         <Link
-          href="/lab"
-          className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 rounded-md"
+          href="/"
+          className="flex items-center gap-3 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
         >
           <div className="bg-learner-gradient inline-flex size-8 items-center justify-center rounded-lg text-xs font-extrabold tracking-wide text-white">
             AI
@@ -32,14 +33,18 @@ export function LearnerNavbar() {
             </text>
           </svg>
         </Link>
+
         <nav className="hidden items-center gap-1 md:flex" aria-label="Navigation principale">
           <Link
-            href="/lab"
+            href="/formations"
             className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/10 hover:text-white"
           >
-            <Beaker className="size-4" />
-            Lab
+            <GraduationCap className="size-4" />
+            Formations
           </Link>
+
+          <AnnexesMenu />
+
           <Link
             href="/progression"
             className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/10 hover:text-white"

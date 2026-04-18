@@ -1,7 +1,7 @@
 # Plan d'évolution AI Training
 
 Date : 2026-04-18
-Statut : Lot 1 livré et validé (2026-04-18)
+Statut : Lot 3 livré et validé (2026-04-18)
 
 ## 1. Objectif
 
@@ -242,25 +242,24 @@ Objectif : base propre avant d'ajouter quoi que ce soit.
 - ✅ `lib/storage/learner-state.ts` : type `LearnerState`, clé `ai-training:state:v1`, `useLearnerState()` hook, helpers `markModuleComplete`, `setModuleProgress`, `setLastVisited`, `getParcoursProgress`.
 - ✅ **Critère d'acceptation** : types exportés, squelette du parcours 1 consommable, état persistant entre reloads.
 
-### Lot 2 — Landing publique + navigation
+### Lot 2 — Landing publique + navigation ✅ livré et validé
 
-- Remplacer `app/page.tsx` (redirect) par une landing publique :
-  - hero (titre, sous-titre, CTA « Commencer »),
-  - 3 blocs promesses (courts),
-  - bloc aperçu parcours (cards cliquables vers `/formations/[slug]`),
-  - footer léger avec lien « À propos ».
-- Refondre la navbar/sidebar :
-  - navbar : logo → `/`, liens « Formations », « Annexes » (menu avec `/prompts` et `/lab`), « Progression », « À propos ».
-  - plus de sidebar persistante sur les pages publiques (sidebar gardée uniquement dans l'écran module, avec le plan des sections du module).
-- Layout racine : une seule navbar, pas de sidebar globale.
-- **Critère d'acceptation** : on peut aller de `/` à `/formations` sans état résiduel.
+- ✅ `app/page.tsx` : landing publique (hero, 3 promesses, aperçu parcours depuis `allParcours`, footer).
+- ✅ `app/formations/page.tsx` : placeholder `/formations` (grille des parcours, sera enrichi Lot 3).
+- ✅ Navbar refondre : logo → `/`, liens Formations · Annexes (dropdown `/prompts` + `/lab`) · Progression · À propos.
+- ✅ `components/learner/annexes-menu.tsx` : dropdown Client Component avec fermeture au clic extérieur.
+- ✅ Layout racine : une seule navbar, pas de sidebar globale.
+- ✅ **Critère d'acceptation** : `npm run build` ✅ · `npm run lint` ✅ · navigation `/` → `/formations` fonctionnelle.
 
-### Lot 3 — Listing et détail parcours
+### Lot 3 — Listing et détail parcours ✅ livré et validé
 
-- `/formations` : grille de parcours avec progression locale injectée (barre + %).
-- `/formations/[parcoursSlug]` : header (titre, durée, niveau), progression du parcours, liste ordonnée de modules avec statut (non commencé / en cours / terminé), CTA « Reprendre ».
-- Verrouillage séquentiel optionnel : par défaut **non** (accès libre aux modules), on pourra activer plus tard si besoin.
-- **Critère d'acceptation** : navigation complète landing → formations → parcours → module (lien même si module placeholder).
+- ✅ `app/formations/page.tsx` : grille depuis `allParcours` + progression injectée via `ParcoursGrid` (Client Component).
+- ✅ `components/formations/parcours-grid.tsx` : barre de progression thin + compteur modules si déjà commencé.
+- ✅ `app/formations/[parcoursSlug]/page.tsx` : async params, `notFound()` si slug inconnu, délègue à `ParcoursDetail`.
+- ✅ `components/formations/parcours-detail.tsx` : header (titre, niveau, durée), barre progression gradient, CTA Commencer/Reprendre/Revoir, liste modules avec icônes statut (Circle / PlayCircle / CheckCircle2) et badges.
+- ✅ `app/formations/[parcoursSlug]/[moduleSlug]/page.tsx` : placeholder fonctionnel (breadcrumb complet, lien retour).
+- Verrouillage séquentiel : non activé (accès libre), prévu optionnellement plus tard.
+- ✅ **Critère d'acceptation** : `npm run build` ✅ · `npm run lint` ✅ · navigation landing → formations → parcours → module fonctionnelle.
 
 ### Lot 4 — Écran module unifié
 
