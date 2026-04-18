@@ -1,14 +1,4 @@
-﻿import {
-  Beaker,
-  BookOpen,
-  Compass,
-  Home,
-  Layers,
-  PlayCircle,
-  Settings,
-  Target,
-  TrendingUp,
-} from "lucide-react";
+﻿import { Beaker, Compass, Home, Info, Layers, PlayCircle, Target, TrendingUp } from "lucide-react";
 import Link from "next/link";
 
 import { learnerNavItems } from "@/lib/learner/data";
@@ -47,23 +37,15 @@ export function LearnerSidebar() {
       </nav>
 
       <p className="mt-7 px-3 py-2 text-[10px] font-semibold tracking-[0.08em] text-[var(--slate-400)] uppercase">
-        Aide
+        À propos
       </p>
       <div className="space-y-1">
-        <button
-          type="button"
+        <Link
+          href="/learner/a-propos"
           className="focus-ring flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm text-[var(--slate-600)] hover:bg-[var(--slate-100)] hover:text-[var(--slate-900)]"
         >
-          <BookOpen className="size-4" />
-          Questions ?
-        </button>
-        <button
-          type="button"
-          className="focus-ring flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm text-[var(--slate-600)] hover:bg-[var(--slate-100)] hover:text-[var(--slate-900)]"
-        >
-          <Settings className="size-4" />
-          Paramètres
-        </button>
+          <Info className="size-4" />À propos
+        </Link>
       </div>
     </aside>
   );
