@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "skills": {
+    "next-best-practices": {
+      "source": "vercel-labs/next-skills",
+      "sourceType": "github",
+      "computedHash": "db85045827ebeb83ac8dbc992b69188755eeb74dcf01cbf5e694d58aa494a106"
+    },
+    "shadcn": {
+      "source": "vercel-labs/vercel-plugin",
+      "sourceType": "github",
+      "computedHash": "4d966b8dbf5b7396ade1c8aeb2f6500aebbee70819110545e9f278b80d2bfdf1"
+    }
+  }
+}
