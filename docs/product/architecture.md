@@ -1,50 +1,49 @@
-﻿# Architecture Applicative
+# Architecture Applicative — état Lot 0
 
 ## Vue d'ensemble
 
-Le produit suit une architecture simple en 4 couches:
+Architecture client-only, sans backend ni base de données. État local via localStorage (Lot 1+).
 
-1. Routing et layouts: `app/`
-2. UI métier: `components/learner/`
-3. Données et types: `lib/learner/`
-4. Logique métier pure (lab): `lib/learner/funnel.ts`
+## Couches
 
-## Routing
+| Couche | Répertoire | Rôle |
+|---|---|---|
+| Routing | `app/` | Routes Next.js, layout racine |
+| UI métier | `components/learner/screens/` | Écrans complets par route |
+| Composants UI | `components/ui/` | Primitives shadcn/ui |
+| Diagrammes SVG | `components/diagram/` | Système data-driven (à remanier Lot 5) |
+| Données | `lib/learner/` | Types, données et logique fonctionnelle |
 
-- Root layout global: `app/layout.tsx`
-- Layout learner partagé: `app/learner/layout.tsx`
-- Pages par feature: `app/learner/<feature>/page.tsx`
+## Routing (état actuel)
 
-La route `/` redirige vers `/learner/dashboard`.
+- `app/layout.tsx` : layout racine — métadonnées, polices, navbar globale.
+- `app/page.tsx` : redirect vers `/lab` (landing publique Lot 2).
+- `app/lab/page.tsx` : lab interactif.
+- `app/a-propos/page.tsx` : page À propos.
+- `app/progression/page.tsx` : progression (placeholder).
 
-## Layouts
-
-- Root layout:
-  - définit metadata globale
-  - charge les polices (Inter, Geist Mono)
-  - applique le style global
-- Learner layout:
-  - navbar fixe
-  - sidebar desktop
-  - zone de contenu principale
+Tous les segments `/learner/*` ont été supprimés.
 
 ## Composants
 
-- `components/learner/screens/*`: écrans complets par route.
-- `components/learner/*`: blocs métier réutilisables (kpi, module, lecteur, etc.).
-- `components/ui/*`: primitives génériques (button, badge, input, progress, textarea).
+- `components/learner/screens/*` : un screen par route (lab, about, progression).
+- `components/learner/learner-navbar.tsx` : navbar fixe (refonte Lot 2).
+- `components/ui/*` : primitives génériques (button, badge, input, progress, …).
+- `components/diagram/*` : système SVG à remanier en Lot 5 pour les widgets.
 
-## Données
+## Données et types
 
-- `lib/learner/types.ts`: contrats métier TypeScript.
-- `lib/learner/data.ts`: contenu local structuré (fondamentaux, contexte, lab, progression).
-- `lib/learner/funnel.ts`: logique déterministe temperature/top-k/top-p.
+- `lib/learner/types.ts` : types utilisés (LabScenario, PromptTemplate, TimelineMilestone).
+- `lib/learner/data.ts` : données du lab, timeline, prompt templates.
+- `lib/learner/funnel.ts` : logique déterministe temperature / top-k / top-p.
+- `lib/diagram/*` : specs et types SVG (conservés pour Lot 5).
+
+## Modèle de contenu cible (Lot 1+)
+
+Voir `docs/product/content-model.md` et le §6 du plan d'évolution.
 
 ## Interactivité
 
-Client Components uniquement quand nécessaire:
+Client Components uniquement là où c'est nécessaire :
 
-- `catalogue-screen.tsx` (filtre recherche/catégorie)
-- `exercice-screen.tsx` (saisie réponse, validation)
-- `lab-screen.tsx` (contrôles et visualisation entonnoir)
-- `lesson-player.tsx` (contrôles lecteur)
+- `lab-screen.tsx` : contrôles et visualisation de l'entonnoir.

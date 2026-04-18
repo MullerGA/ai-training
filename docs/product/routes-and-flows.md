@@ -1,41 +1,38 @@
-﻿# Routes et Parcours
+# Routes et Parcours — état Lot 0
 
-## Routes publiques
+## Routes actives
 
-- `/` -> redirection vers `/learner/dashboard`
+| Route | Description |
+|---|---|
+| `/` | Redirection vers `/lab` (landing publique à venir — Lot 2) |
+| `/lab` | Entonnoir de décision LLM (lab interactif autonome) |
+| `/a-propos` | Présentation de l'application |
+| `/progression` | Suivi de progression (placeholder — fonctionnel Lot 7) |
 
-## Routes learner
+## Routes supprimées (Lot 0)
 
-- `/learner/dashboard`
-- `/learner/diagrammes`
-- `/learner/catalogue`
-- `/learner/parcours`
-- `/learner/lecon`
-- `/learner/exercice`
-- `/learner/lab`
-- `/learner/progression`
+Les routes suivantes ont été supprimées car elles correspondent à un POC non retenu :
 
-## Parcours fonctionnel
+- `/learner/dashboard` — fusionné dans landing + progression (Lot 2 / Lot 7)
+- `/learner/catalogue` — remplacé par `/formations` (Lot 3)
+- `/learner/parcours` — remplacé par `/formations/[parcoursSlug]` (Lot 3)
+- `/learner/lecon` — absorbé dans `/formations/[parcoursSlug]/[moduleSlug]` (Lot 4)
+- `/learner/exercice` — absorbé dans `/formations/[parcoursSlug]/[moduleSlug]` (Lot 4)
+- `/learner/diagrammes` — galerie SVG autonome supprimée, schémas à réintégrer comme widgets (Lot 5)
 
-1. Dashboard
-2. Catalogue
-3. Parcours (chapitres)
-4. Leçon
-5. Exercice
-6. Lab interactif
-7. Progression
+## Routes à créer (lots suivants)
 
-## Description des écrans
-
-- Dashboard: vue synthèse (module courant, KPI, concepts clés, timeline, contexte).
-- Catalogue: recherche + filtrage des parcours disponibles.
-- Parcours: structure du module et chapitres associés.
-- Leçon: lecture de contenu pédagogique + navigation chapitre.
-- Exercice: mise en pratique guidée avec feedback local.
-- Lab: visualisation déterministe des filtres temperature, top-k, top-p.
-- Progression: suivi de performance et recommandations.
+| Route | Lot | Description |
+|---|---|---|
+| `/` | Lot 2 | Landing publique (hero, parcours, CTA) |
+| `/formations` | Lot 3 | Liste des parcours avec progression |
+| `/formations/[parcoursSlug]` | Lot 3 | Détail d'un parcours |
+| `/formations/[parcoursSlug]/[moduleSlug]` | Lot 4 | Écran module unifié |
+| `/prompts` | Lot 6 | Bibliothèque de prompts réutilisables |
+| `/progression` | Lot 7 | Progression réelle depuis localStorage |
 
 ## Navigation
 
-- Navigation principale via sidebar learner.
-- Actions contextuelles dans chaque écran (boutons de poursuite, reprise, etc.).
+- Navbar globale dans `app/layout.tsx` (fixe, dark).
+- Liens actifs : Lab · Progression · À propos.
+- Refonte navbar complète prévue au Lot 2.

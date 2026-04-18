@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Inter } from "next/font/google";
 import type { ReactNode } from "react";
+import { LearnerNavbar } from "@/components/learner/learner-navbar";
 import "./globals.css";
 
 const inter = Inter({
@@ -14,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "IA Formation Portal",
-  description: "Parcours de formation IA pour les collaborateurs",
+  title: "AI Training",
+  description: "Portail de formation IA générative",
 };
 
 export default function RootLayout({
@@ -30,7 +31,8 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full bg-background text-foreground" suppressHydrationWarning>
-        {children}
+        <LearnerNavbar />
+        <div className="pt-16">{children}</div>
       </body>
     </html>
   );

@@ -1,7 +1,7 @@
 # Plan d'évolution AI Training
 
 Date : 2026-04-18
-Statut : à développer
+Statut : Lot 0 livré et validé (2026-04-18)
 
 ## 1. Objectif
 
@@ -218,18 +218,21 @@ type LearnerState = {
 
 ## 9. Lots de livraison
 
-### Lot 0 — Nettoyage (fondations)
+### Lot 0 — Nettoyage (fondations) ✅ livré et validé
 
 Objectif : base propre avant d'ajouter quoi que ce soit.
 
-- Supprimer les routes et fichiers listés en §4 (dashboard, catalogue, parcours, lecon, exercice, diagrammes, dossiers vides).
-- Supprimer `components/learner/screens/*` devenus inutiles.
-- Supprimer `lib/learner/data.ts` (remplacé Lot 1) et les types qui n'ont plus d'usage.
-- Supprimer les références à « Claire » et aux KPI factices.
-- Corriger les encodages cassés sur les fichiers conservés.
-- Mettre à jour la sidebar / navbar pour ne plus référencer les routes supprimées.
-- Mettre à jour `docs/product/routes-and-flows.md`, `docs/product/architecture.md`, `docs/product/content-model.md` en conséquence.
-- **Critère d'acceptation** : `npm run build` passe, aucune route orpheline, aucun import mort (`npm run lint` clean).
+- ✅ Routes supprimées : `/learner/dashboard`, `/learner/catalogue`, `/learner/parcours`, `/learner/lecon`, `/learner/exercice`, `/learner/diagrammes` — ainsi que tout `app/learner/`.
+- ✅ Routes migrées : `/learner/lab` → `/lab`, `/learner/a-propos` → `/a-propos`, `/learner/progression` → `/progression`.
+- ✅ Screens supprimés : `dashboard-screen`, `catalogue-screen`, `parcours-screen`, `lecon-screen`, `exercice-screen`, `diagram-catalog-screen`.
+- ✅ Composants orphelins supprimés : `kpi-card`, `module-card`, `hint-card`, `progress-block`, `lesson-player`, `learner-sidebar`.
+- ✅ Référence « Claire » supprimée (avec `dashboard-screen`). KPI factices retirés de `progression-screen`.
+- ✅ Encodages cassés (mojibake) disparus avec la suppression de `catalogue-screen`.
+- ✅ `lib/learner/data.ts` réduit aux seules données encore utiles (`learnerLabScenarios`, `learnerTimeline`, `learnerPromptTemplates`).
+- ✅ `lib/learner/types.ts` réduit aux types encore référencés.
+- ✅ Navbar déplacée dans le layout racine (`app/layout.tsx`) ; liens mis à jour (Lab · Progression · À propos).
+- ✅ `docs/product/routes-and-flows.md`, `architecture.md`, `content-model.md` mis à jour.
+- ✅ **Critère d'acceptation** : `npm run build` ✅ · `npm run lint` ✅ · aucune route orpheline.
 
 ### Lot 1 — Modèle de contenu + persistance
 

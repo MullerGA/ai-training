@@ -1,12 +1,14 @@
-﻿import { BookOpen, MessageCircleQuestion } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
+import { Beaker, Info, TrendingUp } from "lucide-react";
+import Link from "next/link";
 
 export function LearnerNavbar() {
   return (
     <header className="fixed top-0 z-50 h-16 w-full border-b border-white/10 bg-[var(--slate-900)] backdrop-blur-sm">
       <div className="flex h-full w-full items-center justify-between px-4 md:px-8">
-        <div className="flex items-center gap-3">
+        <Link
+          href="/lab"
+          className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 rounded-md"
+        >
           <div className="bg-learner-gradient inline-flex size-8 items-center justify-center rounded-lg text-xs font-extrabold tracking-wide text-white">
             AI
           </div>
@@ -29,17 +31,29 @@ export function LearnerNavbar() {
               AI TRAINING
             </text>
           </svg>
-        </div>
-        <div className="hidden items-center gap-2 md:flex">
-          <Button variant="ghost-light" size="sm">
-            <BookOpen />
-            Support de formation
-          </Button>
-          <Button variant="gradient" size="sm">
-            <MessageCircleQuestion />
-            Questions ?
-          </Button>
-        </div>
+        </Link>
+        <nav className="hidden items-center gap-1 md:flex" aria-label="Navigation principale">
+          <Link
+            href="/lab"
+            className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+          >
+            <Beaker className="size-4" />
+            Lab
+          </Link>
+          <Link
+            href="/progression"
+            className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+          >
+            <TrendingUp className="size-4" />
+            Progression
+          </Link>
+          <Link
+            href="/a-propos"
+            className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+          >
+            <Info className="size-4" />À propos
+          </Link>
+        </nav>
       </div>
     </header>
   );
