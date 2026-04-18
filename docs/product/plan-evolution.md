@@ -261,15 +261,15 @@ Objectif : base propre avant d'ajouter quoi que ce soit.
 - Verrouillage sÃ©quentiel : non activÃ© (accÃ¨s libre), prÃ©vu optionnellement plus tard.
 - âœ… **CritÃ¨re d'acceptation** : `npm run build` âœ… Â· `npm run lint` âœ… Â· navigation landing â†’ formations â†’ parcours â†’ module fonctionnelle.
 
-### Lot 4 â€” Ã‰cran module unifiÃ©
+### Lot 4 — Écran module unifié ✅ livré (en attente de validation)
 
-- Route `/formations/[parcoursSlug]/[moduleSlug]`, rendu basÃ© sur l'array `sections`.
-- Composants de rendu dans `components/module/` :
+- ✅ Route `/formations/[parcoursSlug]/[moduleSlug]`, rendu basé sur l'array `sections`.
+- ✅ Composants de rendu dans `components/module/` :
   - `SectionIntro`, `SectionConcept`, `SectionInteractive`, `SectionExercise`, `SectionRecap`.
-- Barre de progression du module calculÃ©e sur la position de scroll / sections visitÃ©es (simple : derniÃ¨re section atteinte).
-- Bouton final Â« Marquer comme terminÃ© Â» â†’ appelle `markModuleComplete` et propose le module suivant.
-- Sidebar contextuelle droite : plan des sections du module + modules voisins.
-- **CritÃ¨re d'acceptation** : un module fictif complet est traversable de bout en bout, Ã©tat persistÃ©.
+- ✅ Barre de progression du module calculée sur la position de scroll / sections visitées (simple : dernière section atteinte).
+- ✅ Bouton final « Marquer comme terminé » → appelle `markModuleComplete` et propose le module suivant.
+- ✅ Sidebar contextuelle droite : plan des sections du module + modules voisins.
+- ✅ **Critère d'acceptation** : un module fictif complet est traversable de bout en bout, état persisté (`npm run build` ✅ · `npm run lint` ✅).
 
 ### Lot 5 â€” Widgets interactifs (batch parcours 1)
 
