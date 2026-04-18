@@ -1,37 +1,44 @@
-# Routes et Parcours — état Lot 3
+﻿# Routes et parcours - etat Lot 4
 
 ## Routes actives
 
 | Route | Description |
 |---|---|
-| `/` | Landing publique (hero, 3 promesses, aperçu parcours, footer) |
-| `/formations` | Grille des parcours avec progression localStorage |
-| `/formations/[parcoursSlug]` | Détail parcours (header, modules, barre progression, CTA reprendre) |
-| `/formations/[parcoursSlug]/[moduleSlug]` | Placeholder module (remplacé Lot 4) |
-| `/lab` | Entonnoir de décision LLM (lab interactif autonome) |
-| `/a-propos` | Présentation de l'application |
-| `/progression` | Suivi de progression (placeholder — fonctionnel Lot 7) |
+| `/` | Landing publique (hero, promesses, apercu parcours) |
+| `/formations` | Grille des parcours avec progression locale |
+| `/formations/[parcoursSlug]` | Detail parcours (header, progression, liste modules, CTA reprendre) |
+| `/formations/[parcoursSlug]/[moduleSlug]` | Ecran module unifie (sections, barre de progression, sidebar contextuelle, fin de module) |
+| `/lab` | Lab interactif autonome |
+| `/a-propos` | Presentation de l'application |
+| `/progression` | Suivi de progression (placeholder, lot 7) |
 
-## Routes supprimées (Lot 0)
+## Navigation principale
 
-- `/learner/dashboard` — fusionné dans landing + progression
-- `/learner/catalogue` — remplacé par `/formations`
-- `/learner/parcours` — remplacé par `/formations/[parcoursSlug]` (Lot 3)
-- `/learner/lecon` — absorbé dans `/formations/[parcoursSlug]/[moduleSlug]` (Lot 4)
-- `/learner/exercice` — absorbé dans `/formations/[parcoursSlug]/[moduleSlug]` (Lot 4)
-- `/learner/diagrammes` — galerie SVG autonome supprimée, schémas à réintégrer comme widgets (Lot 5)
+- Navbar globale dans `app/layout.tsx`.
+- Liens: `Formations`, `Annexes` (Prompts + Lab), `Progression`, `A propos`.
+- Pas de sidebar globale persistante.
 
-## Routes à créer (lots suivants)
+## Flux principal actuel
+
+1. `/` -> `/formations`
+2. `/formations` -> `/formations/[parcoursSlug]`
+3. `/formations/[parcoursSlug]` -> `/formations/[parcoursSlug]/[moduleSlug]`
+4. Dans le module:
+   - progression calculee par derniere section atteinte,
+   - bouton final "Marquer comme termine",
+   - navigation vers module precedent/suivant.
+
+## Routes supprimees (Lot 0)
+
+- `/learner/dashboard`
+- `/learner/catalogue`
+- `/learner/parcours`
+- `/learner/lecon`
+- `/learner/exercice`
+- `/learner/diagrammes`
+
+## Routes prevues ensuite
 
 | Route | Lot | Description |
 |---|---|---|
-| `/formations/[parcoursSlug]/[moduleSlug]` | Lot 4 | Écran module unifié (remplace le placeholder) |
-| `/prompts` | Lot 6 | Bibliothèque de prompts réutilisables |
-
-## Navigation
-
-- Navbar globale dans `app/layout.tsx` (fixe, dark, Server Component).
-- Composant dropdown "Annexes" (`components/learner/annexes-menu.tsx`) : Client Component.
-- Liens navbar : **Formations** · **Annexes** (menu → Prompts, Lab) · **Progression** · **À propos**.
-- Logo → `/` (accueil).
-- Pas de sidebar persistante globale ; sidebar contextuelle prévue uniquement dans l'écran module (Lot 4).
+| `/prompts` | Lot 6 | Bibliotheque de prompts reutilisables |

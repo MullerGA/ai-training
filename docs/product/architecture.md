@@ -1,49 +1,43 @@
-# Architecture Applicative — état Lot 0
+﻿# Architecture applicative - etat Lot 4
 
 ## Vue d'ensemble
 
-Architecture client-only, sans backend ni base de données. État local via localStorage (Lot 1+).
+Application Next.js 16 client-first, sans backend et sans base de donnees.
+L'etat apprenant est persiste en localStorage via `useLearnerState()`.
 
 ## Couches
 
-| Couche | Répertoire | Rôle |
+| Couche | Repertoire | Role |
 |---|---|---|
-| Routing | `app/` | Routes Next.js, layout racine |
-| UI métier | `components/learner/screens/` | Écrans complets par route |
-| Composants UI | `components/ui/` | Primitives shadcn/ui |
-| Diagrammes SVG | `components/diagram/` | Système data-driven (à remanier Lot 5) |
-| Données | `lib/learner/` | Types, données et logique fonctionnelle |
+| Routing | `app/` | Pages Next.js App Router |
+| Ecrans metier | `components/formations/`, `components/module/`, `components/learner/screens/` | Ecrans et blocs de rendu par route |
+| UI primitives | `components/ui/` | Composants shadcn/ui + utilitaires styles |
+| Contenu | `lib/content/` | Catalogue parcours/modules type |
+| Etat local | `lib/storage/learner-state.ts` | Persistance progression (`ai-training:state:v1`) |
+| Widgets et diagrammes | `components/diagram/`, `lib/diagram/` | Socle visuel a reutiliser en Lot 5 |
 
-## Routing (état actuel)
+## Routing (etat actuel)
 
-- `app/layout.tsx` : layout racine — métadonnées, polices, navbar globale.
-- `app/page.tsx` : redirect vers `/lab` (landing publique Lot 2).
-- `app/lab/page.tsx` : lab interactif.
-- `app/a-propos/page.tsx` : page À propos.
-- `app/progression/page.tsx` : progression (placeholder).
+- `app/layout.tsx`: layout racine + navbar globale.
+- `app/page.tsx`: landing publique.
+- `app/formations/page.tsx`: listing parcours.
+- `app/formations/[parcoursSlug]/page.tsx`: detail d'un parcours.
+- `app/formations/[parcoursSlug]/[moduleSlug]/page.tsx`: ecran module unifie (Lot 4).
+- `app/lab/page.tsx`: lab autonome.
+- `app/a-propos/page.tsx`: page A propos.
+- `app/progression/page.tsx`: progression (placeholder).
 
-Tous les segments `/learner/*` ont été supprimés.
+## Ecran module (Lot 4)
 
-## Composants
+- `components/module/module-screen.tsx` (Client Component):
+  - rendu base sur `module.sections`,
+  - suivi de progression sur la derniere section atteinte,
+  - synchronisation `setModuleProgress`,
+  - action finale `markModuleComplete`,
+  - sidebar: plan de sections + modules voisins.
+- `components/module/section-*.tsx`: rendu dedie pour `intro`, `concept`, `interactive`, `exercise`, `recap`.
 
-- `components/learner/screens/*` : un screen par route (lab, about, progression).
-- `components/learner/learner-navbar.tsx` : navbar fixe (refonte Lot 2).
-- `components/ui/*` : primitives génériques (button, badge, input, progress, …).
-- `components/diagram/*` : système SVG à remanier en Lot 5 pour les widgets.
+## Notes
 
-## Données et types
-
-- `lib/learner/types.ts` : types utilisés (LabScenario, PromptTemplate, TimelineMilestone).
-- `lib/learner/data.ts` : données du lab, timeline, prompt templates.
-- `lib/learner/funnel.ts` : logique déterministe temperature / top-k / top-p.
-- `lib/diagram/*` : specs et types SVG (conservés pour Lot 5).
-
-## Modèle de contenu cible (Lot 1+)
-
-Voir `docs/product/content-model.md` et le §6 du plan d'évolution.
-
-## Interactivité
-
-Client Components uniquement là où c'est nécessaire :
-
-- `lab-screen.tsx` : contrôles et visualisation de l'entonnoir.
+- Les widgets interactifs reels des sections `interactive` restent en placeholder en Lot 4.
+- Le registre de widgets et l'integration du Lab dans ce registre sont prevus en Lot 5.

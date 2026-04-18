@@ -1,110 +1,110 @@
-# Plan d'évolution AI Training
+﻿# Plan d'Ã©volution AI Training
 
 Date : 2026-04-18
-Statut : Lot 3 livré et validé (2026-04-18)
+Statut : Lot 4 livré (en attente de validation propriétaire) (2026-04-18)
 
 ## 1. Objectif
 
-Passer d'un POC hétérogène à une base produit propre et cohérente, centrée sur un parcours d'apprentissage interactif. Chaque module doit mêler contenu pédagogique et composant interactif, dans la lignée de ce que fait déjà le Lab.
+Passer d'un POC hÃ©tÃ©rogÃ¨ne Ã  une base produit propre et cohÃ©rente, centrÃ©e sur un parcours d'apprentissage interactif. Chaque module doit mÃªler contenu pÃ©dagogique et composant interactif, dans la lignÃ©e de ce que fait dÃ©jÃ  le Lab.
 
 ## 2. Principes directeurs
 
 - **Anonyme** : pas d'authentification, pas de backend.
-- **Simple** : une seule structure de contenu (parcours → modules), pas d'architecture spéculative.
+- **Simple** : une seule structure de contenu (parcours â†’ modules), pas d'architecture spÃ©culative.
 - **Interactif** : chaque module doit comporter un bloc interactif JS (manipulations, visualisations, exercices).
-- **Contenu maîtrisé** : rédaction unique (le propriétaire), donc modèle de contenu facile à écrire à la main.
+- **Contenu maÃ®trisÃ©** : rÃ©daction unique (le propriÃ©taire), donc modÃ¨le de contenu facile Ã  Ã©crire Ã  la main.
 - **Solide pour la suite** : on supprime les artefacts POC et on pose des conventions claires.
 
-## 3. État cible — parcours utilisateur
+## 3. Ã‰tat cible â€” parcours utilisateur
 
 ```
 Landing publique (/)
-        │  CTA « Commencer »
-        ▼
+        â”‚  CTA Â« Commencer Â»
+        â–¼
 Liste des parcours (/formations)
-        │
-        ▼
-Détail d'un parcours (/formations/[parcours])
-        │  liste ordonnée des modules + progression
-        ▼
+        â”‚
+        â–¼
+DÃ©tail d'un parcours (/formations/[parcours])
+        â”‚  liste ordonnÃ©e des modules + progression
+        â–¼
 Module (/formations/[parcours]/[module])
-        │  sections : intro → concept → interactif → exercice → récap
-        ▼
-Progression personnelle (/progression)   ← accessible depuis la navbar
+        â”‚  sections : intro â†’ concept â†’ interactif â†’ exercice â†’ rÃ©cap
+        â–¼
+Progression personnelle (/progression)   â† accessible depuis la navbar
 ```
 
-Accès transverses :
-- Annexes (regroupées dans la navbar sous « Annexes ») :
-  - `/prompts` — bibliothèque de prompts réutilisables.
-  - `/lab` — entonnoir de décision d'un LLM (outil autonome hérité).
+AccÃ¨s transverses :
+- Annexes (regroupÃ©es dans la navbar sous Â« Annexes Â») :
+  - `/prompts` â€” bibliothÃ¨que de prompts rÃ©utilisables.
+  - `/lab` â€” entonnoir de dÃ©cision d'un LLM (outil autonome hÃ©ritÃ©).
 - `/a-propos`.
 
-Les annexes sont consultables à tout moment, indépendamment des parcours. Le widget `lab-funnel` est mutualisé entre `/lab` et le module correspondant du parcours « Les LLM ».
+Les annexes sont consultables Ã  tout moment, indÃ©pendamment des parcours. Le widget `lab-funnel` est mutualisÃ© entre `/lab` et le module correspondant du parcours Â« Les LLM Â».
 
 ## 4. Arborescence cible
 
-### Routes à créer
+### Routes Ã  crÃ©er
 
 - `/` : landing publique (remplace le redirect actuel).
 - `/formations` : liste des parcours disponibles.
-- `/formations/[parcoursSlug]` : détail d'un parcours (modules).
-- `/formations/[parcoursSlug]/[moduleSlug]` : écran module unifié.
-- `/progression` : récap personnel (depuis localStorage).
+- `/formations/[parcoursSlug]` : dÃ©tail d'un parcours (modules).
+- `/formations/[parcoursSlug]/[moduleSlug]` : Ã©cran module unifiÃ©.
+- `/progression` : rÃ©cap personnel (depuis localStorage).
 
-### Routes à conserver
+### Routes Ã  conserver
 
 - `/lab` : Lab autonome (le plus abouti aujourd'hui).
-- `/a-propos` : tel quel, seul le contenu peut être revu.
+- `/a-propos` : tel quel, seul le contenu peut Ãªtre revu.
 
-### Routes / dossiers à supprimer
+### Routes / dossiers Ã  supprimer
 
-- `/learner/dashboard` : fusionné dans landing + progression.
-- `/learner/catalogue` : remplacé par `/formations`.
-- `/learner/parcours` : remplacé par `/formations/[parcoursSlug]`.
-- `/learner/lecon` : absorbé dans la page module.
-- `/learner/exercice` : absorbé dans la page module.
-- `/learner/diagrammes` : la galerie SVG actuelle est à refaire, l'écran vitrine autonome disparaît (les schémas éventuellement retenus seront utilisés en illustration dans les modules).
-- Dossiers vides à supprimer : `app/learner/accueil/`, `app/learner/chapitres/`, `components/learner/vitrine/`, `lib/learner/vitrine/`.
+- `/learner/dashboard` : fusionnÃ© dans landing + progression.
+- `/learner/catalogue` : remplacÃ© par `/formations`.
+- `/learner/parcours` : remplacÃ© par `/formations/[parcoursSlug]`.
+- `/learner/lecon` : absorbÃ© dans la page module.
+- `/learner/exercice` : absorbÃ© dans la page module.
+- `/learner/diagrammes` : la galerie SVG actuelle est Ã  refaire, l'Ã©cran vitrine autonome disparaÃ®t (les schÃ©mas Ã©ventuellement retenus seront utilisÃ©s en illustration dans les modules).
+- Dossiers vides Ã  supprimer : `app/learner/accueil/`, `app/learner/chapitres/`, `components/learner/vitrine/`, `lib/learner/vitrine/`.
 
 ### Convention de nommage
 
-- On quitte le préfixe `/learner/*` (sans objet puisque tout est public) au profit de routes plates en français.
-- Tous les slugs sont en minuscules, sans accents, séparés par des tirets.
+- On quitte le prÃ©fixe `/learner/*` (sans objet puisque tout est public) au profit de routes plates en franÃ§ais.
+- Tous les slugs sont en minuscules, sans accents, sÃ©parÃ©s par des tirets.
 
 ## 5. Catalogue cible
 
-### Parcours 1 — Le monde de l'IA (~30 min)
-Vision macro avant toute plongée technique.
+### Parcours 1 â€” Le monde de l'IA (~30 min)
+Vision macro avant toute plongÃ©e technique.
 
 | # | Module | Widgets interactifs |
 |---|---|---|
-| 1 | Évolution & maturité de l'IA | `timeline` + `hype-cycle` (combinés dans le même module) |
-| 2 | L'iceberg software / hardware | `iceberg-explorer` (SVG cliquable, couches : Applications → AI Deployment → AI Training → Data Center → Énergie) |
-| 3 | Les acteurs du marché | galerie filtrable (pure players / GAFAM / chinois / old-tech) |
+| 1 | Ã‰volution & maturitÃ© de l'IA | `timeline` + `hype-cycle` (combinÃ©s dans le mÃªme module) |
+| 2 | L'iceberg software / hardware | `iceberg-explorer` (SVG cliquable, couches : Applications â†’ AI Deployment â†’ AI Training â†’ Data Center â†’ Ã‰nergie) |
+| 3 | Les acteurs du marchÃ© | galerie filtrable (pure players / GAFAM / chinois / old-tech) |
 
-### Parcours 2 — Les LLM (~45 min)
-Ce qui se passe à l'intérieur.
+### Parcours 2 â€” Les LLM (~45 min)
+Ce qui se passe Ã  l'intÃ©rieur.
 
 | # | Module | Widgets interactifs |
 |---|---|---|
 | 1 | Du texte aux tokens | `tokenizer-demo` |
-| 2 | Probabilités et génération | `lab-funnel` (temperature seule) |
+| 2 | ProbabilitÃ©s et gÃ©nÃ©ration | `lab-funnel` (temperature seule) |
 | 3 | L'entonnoir complet | `lab-funnel` (temperature + top-k + top-p) |
-| 4 | Mémoire et fenêtre de contexte | `context-window` |
+| 4 | MÃ©moire et fenÃªtre de contexte | `context-window` |
 | 5 | Limites et hallucinations | `hallucination-spotter` |
 
-### Parcours 3 — Anatomie d'un prompt (~45 min)
-Transformer la théorie en savoir-faire.
+### Parcours 3 â€” Anatomie d'un prompt (~45 min)
+Transformer la thÃ©orie en savoir-faire.
 
 | # | Module | Widgets interactifs |
 |---|---|---|
-| 1 | Les 4 ingrédients (rôle, contexte, tâche, format) | `prompt-builder` |
-| 2 | Itérer un prompt | `prompt-compare` |
-| 3 | Templates réutilisables | réutilise `prompt-templates` depuis les annexes |
-| 4 | Atelier final | rédaction libre + grille d'auto-évaluation |
+| 1 | Les 4 ingrÃ©dients (rÃ´le, contexte, tÃ¢che, format) | `prompt-builder` |
+| 2 | ItÃ©rer un prompt | `prompt-compare` |
+| 3 | Templates rÃ©utilisables | rÃ©utilise `prompt-templates` depuis les annexes |
+| 4 | Atelier final | rÃ©daction libre + grille d'auto-Ã©valuation |
 
-### Parcours 4 — Les outils avancés (~50 min)
-L'écosystème autour d'un LLM.
+### Parcours 4 â€” Les outils avancÃ©s (~50 min)
+L'Ã©cosystÃ¨me autour d'un LLM.
 
 | # | Module | Widgets interactifs |
 |---|---|---|
@@ -115,14 +115,14 @@ L'écosystème autour d'un LLM.
 
 ### Annexes (hors parcours)
 
-Accessibles à tout moment depuis la navbar :
+Accessibles Ã  tout moment depuis la navbar :
 
-- `/prompts` — bibliothèque de prompts réutilisables (base : `learnerPromptTemplates` existants, extensible).
-- `/lab` — entonnoir de décision d'un LLM, outil autonome. Le widget `lab-funnel` est le même que celui embarqué dans le parcours 2.
+- `/prompts` â€” bibliothÃ¨que de prompts rÃ©utilisables (base : `learnerPromptTemplates` existants, extensible).
+- `/lab` â€” entonnoir de dÃ©cision d'un LLM, outil autonome. Le widget `lab-funnel` est le mÃªme que celui embarquÃ© dans le parcours 2.
 
-## 6. Modèle de contenu
+## 6. ModÃ¨le de contenu
 
-Contenu écrit à la main, côté repo, en TypeScript fortement typé (pas de CMS, pas de MDX dans un premier temps).
+Contenu Ã©crit Ã  la main, cÃ´tÃ© repo, en TypeScript fortement typÃ© (pas de CMS, pas de MDX dans un premier temps).
 
 ### Contrats
 
@@ -133,7 +133,7 @@ export type Parcours = {
   title: string;
   tagline: string;        // une phrase d'accroche
   description: string;    // 2-3 phrases
-  level: "Débutant" | "Intermédiaire" | "Avancé";
+  level: "DÃ©butant" | "IntermÃ©diaire" | "AvancÃ©";
   estimatedMinutes: number;
   modules: Module[];
 };
@@ -156,21 +156,21 @@ export type ModuleSection =
 
 export type InteractiveWidget =
   | { type: "lab-funnel"; scenarioId: string }
-  | { type: "prompt-compare"; /* à définir par module */ }
+  | { type: "prompt-compare"; /* Ã  dÃ©finir par module */ }
   | { type: "tokenizer-demo"; text: string };
 ```
 
 ### Organisation fichiers
 
 - `lib/content/parcours/[slug].ts` : un fichier par parcours, exporte un objet `Parcours`.
-- `lib/content/index.ts` : agrège tous les parcours, expose `getParcours`, `getModule` (recherche par slug).
+- `lib/content/index.ts` : agrÃ¨ge tous les parcours, expose `getParcours`, `getModule` (recherche par slug).
 - `lib/content/widgets/` : composants interactifs embarquables, dont le Lab.
 
-### Données initiales
+### DonnÃ©es initiales
 
-- Démarrer avec **un seul parcours** (« Fondamentaux de l'IA générative ») pour poser la structure.
-- 3 à 4 modules génériques rédigés par le propriétaire.
-- Chaque module propose au minimum : intro → concept → interactif → exercice → récap.
+- DÃ©marrer avec **un seul parcours** (Â« Fondamentaux de l'IA gÃ©nÃ©rative Â») pour poser la structure.
+- 3 Ã  4 modules gÃ©nÃ©riques rÃ©digÃ©s par le propriÃ©taire.
+- Chaque module propose au minimum : intro â†’ concept â†’ interactif â†’ exercice â†’ rÃ©cap.
 
 ## 7. Persistance locale
 
@@ -180,169 +180,170 @@ Simple, uniquement :
 // lib/storage/learner-state.ts
 type LearnerState = {
   completedModules: string[];                       // `${parcoursSlug}/${moduleSlug}`
-  moduleProgress: Record<string, number>;            // 0..100, même clé
+  moduleProgress: Record<string, number>;            // 0..100, mÃªme clÃ©
   lastVisited?: { parcours: string; module: string };
 };
 ```
 
-- Clé localStorage unique : `ai-training:state:v1`.
-- Lecture/écriture via un petit hook `useLearnerState()` (client component).
-- Valeur par défaut si vide ou JSON invalide.
-- Pas d'historique, pas de date, pas de streak, pas de minutes — on retire ces KPI factices.
+- ClÃ© localStorage unique : `ai-training:state:v1`.
+- Lecture/Ã©criture via un petit hook `useLearnerState()` (client component).
+- Valeur par dÃ©faut si vide ou JSON invalide.
+- Pas d'historique, pas de date, pas de streak, pas de minutes â€” on retire ces KPI factices.
 
-## 8. UI — composants et design
+## 8. UI â€” composants et design
 
 ### Nettoyage
 
-- Corriger tout le **mojibake** (accents cassés) dans [catalogue-screen.tsx](components/learner/screens/catalogue-screen.tsx) et partout où il apparaît. Forcer encodage UTF-8 dans tous les nouveaux fichiers.
-- Supprimer le persona hardcodé « Claire » ; remplacer par un ton neutre (tutoiement générique ou 2e personne impersonnelle).
-- Retirer les KPI inventés (modules validés, série, heures cumulées) sauf ceux calculables depuis le state réel (nombre de modules complétés, % global).
+- Corriger tout le **mojibake** (accents cassÃ©s) dans [catalogue-screen.tsx](components/learner/screens/catalogue-screen.tsx) et partout oÃ¹ il apparaÃ®t. Forcer encodage UTF-8 dans tous les nouveaux fichiers.
+- Supprimer le persona hardcodÃ© Â« Claire Â» ; remplacer par un ton neutre (tutoiement gÃ©nÃ©rique ou 2e personne impersonnelle).
+- Retirer les KPI inventÃ©s (modules validÃ©s, sÃ©rie, heures cumulÃ©es) sauf ceux calculables depuis le state rÃ©el (nombre de modules complÃ©tÃ©s, % global).
 
-### Dashboard → Progression simplifiée
+### Dashboard â†’ Progression simplifiÃ©e
 
-- Plus de « dashboard » lourd, remplacé par :
+- Plus de Â« dashboard Â» lourd, remplacÃ© par :
   - page d'accueil publique (vitrine),
-  - page `/progression` minimale (un compteur modules complétés, une barre globale, la liste des modules avec statut).
+  - page `/progression` minimale (un compteur modules complÃ©tÃ©s, une barre globale, la liste des modules avec statut).
 
 ### Diagrammes
 
-- La galerie autonome `/learner/diagrammes` est supprimée.
-- Le système SVG data-driven existant (`components/diagram/*`, `lib/diagram/*`) est **refondu** : il doit servir de socle aux widgets visuels clés (`iceberg-explorer`, `timeline`, `hype-cycle`, `rag-flow`, `mcp-diagram`, `agent-loop`). Le visuel doit être soigné (inspiration iceberg et hype cycle fournis par le propriétaire), responsive et accessible.
-- Les specs actuelles sont archivées ou réécrites au cas par cas selon les besoins des widgets.
+- La galerie autonome `/learner/diagrammes` est supprimÃ©e.
+- Le systÃ¨me SVG data-driven existant (`components/diagram/*`, `lib/diagram/*`) est **refondu** : il doit servir de socle aux widgets visuels clÃ©s (`iceberg-explorer`, `timeline`, `hype-cycle`, `rag-flow`, `mcp-diagram`, `agent-loop`). Le visuel doit Ãªtre soignÃ© (inspiration iceberg et hype cycle fournis par le propriÃ©taire), responsive et accessible.
+- Les specs actuelles sont archivÃ©es ou rÃ©Ã©crites au cas par cas selon les besoins des widgets.
 
 ### Design system
 
-- Garder shadcn/ui, Tailwind 4, les tokens actuels (`app/globals.css`) — ils sont propres.
+- Garder shadcn/ui, Tailwind 4, les tokens actuels (`app/globals.css`) â€” ils sont propres.
 - Garder les primitives existantes dans `components/ui/*`.
-- Factoriser une fois pour toutes les classes métier utilisées (`page-title`, `page-lead`, `panel-card`, `text-caption`).
+- Factoriser une fois pour toutes les classes mÃ©tier utilisÃ©es (`page-title`, `page-lead`, `panel-card`, `text-caption`).
 
 ## 9. Lots de livraison
 
-### Lot 0 — Nettoyage (fondations) ✅ livré et validé
+### Lot 0 â€” Nettoyage (fondations) âœ… livrÃ© et validÃ©
 
 Objectif : base propre avant d'ajouter quoi que ce soit.
 
-- ✅ Routes supprimées : `/learner/dashboard`, `/learner/catalogue`, `/learner/parcours`, `/learner/lecon`, `/learner/exercice`, `/learner/diagrammes` — ainsi que tout `app/learner/`.
-- ✅ Routes migrées : `/learner/lab` → `/lab`, `/learner/a-propos` → `/a-propos`, `/learner/progression` → `/progression`.
-- ✅ Screens supprimés : `dashboard-screen`, `catalogue-screen`, `parcours-screen`, `lecon-screen`, `exercice-screen`, `diagram-catalog-screen`.
-- ✅ Composants orphelins supprimés : `kpi-card`, `module-card`, `hint-card`, `progress-block`, `lesson-player`, `learner-sidebar`.
-- ✅ Référence « Claire » supprimée (avec `dashboard-screen`). KPI factices retirés de `progression-screen`.
-- ✅ Encodages cassés (mojibake) disparus avec la suppression de `catalogue-screen`.
-- ✅ `lib/learner/data.ts` réduit aux seules données encore utiles (`learnerLabScenarios`, `learnerTimeline`, `learnerPromptTemplates`).
-- ✅ `lib/learner/types.ts` réduit aux types encore référencés.
-- ✅ Navbar déplacée dans le layout racine (`app/layout.tsx`) ; liens mis à jour (Lab · Progression · À propos).
-- ✅ `docs/product/routes-and-flows.md`, `architecture.md`, `content-model.md` mis à jour.
-- ✅ **Critère d'acceptation** : `npm run build` ✅ · `npm run lint` ✅ · aucune route orpheline.
+- âœ… Routes supprimÃ©es : `/learner/dashboard`, `/learner/catalogue`, `/learner/parcours`, `/learner/lecon`, `/learner/exercice`, `/learner/diagrammes` â€” ainsi que tout `app/learner/`.
+- âœ… Routes migrÃ©es : `/learner/lab` â†’ `/lab`, `/learner/a-propos` â†’ `/a-propos`, `/learner/progression` â†’ `/progression`.
+- âœ… Screens supprimÃ©s : `dashboard-screen`, `catalogue-screen`, `parcours-screen`, `lecon-screen`, `exercice-screen`, `diagram-catalog-screen`.
+- âœ… Composants orphelins supprimÃ©s : `kpi-card`, `module-card`, `hint-card`, `progress-block`, `lesson-player`, `learner-sidebar`.
+- âœ… RÃ©fÃ©rence Â« Claire Â» supprimÃ©e (avec `dashboard-screen`). KPI factices retirÃ©s de `progression-screen`.
+- âœ… Encodages cassÃ©s (mojibake) disparus avec la suppression de `catalogue-screen`.
+- âœ… `lib/learner/data.ts` rÃ©duit aux seules donnÃ©es encore utiles (`learnerLabScenarios`, `learnerTimeline`, `learnerPromptTemplates`).
+- âœ… `lib/learner/types.ts` rÃ©duit aux types encore rÃ©fÃ©rencÃ©s.
+- âœ… Navbar dÃ©placÃ©e dans le layout racine (`app/layout.tsx`) ; liens mis Ã  jour (Lab Â· Progression Â· Ã€ propos).
+- âœ… `docs/product/routes-and-flows.md`, `architecture.md`, `content-model.md` mis Ã  jour.
+- âœ… **CritÃ¨re d'acceptation** : `npm run build` âœ… Â· `npm run lint` âœ… Â· aucune route orpheline.
 
-### Lot 1 — Modèle de contenu + persistance ✅ livré et validé
+### Lot 1 â€” ModÃ¨le de contenu + persistance âœ… livrÃ© et validÃ©
 
-- ✅ `lib/content/types.ts` : types `Parcours`, `Module`, `ModuleSection`, `InteractiveWidget` (union exhaustive des 14 widgets du catalogue).
-- ✅ `lib/content/parcours/le-monde-de-l-ia.ts` : squelette Parcours 1, 3 modules (Évolution & maturité / Iceberg / Acteurs), structure intro → concept → interactif → exercice → récap, placeholders `TODO: [propriétaire]`.
-- ✅ `lib/content/index.ts` : `allParcours`, `getParcours(slug)`, `getModule(parcoursSlug, moduleSlug)`.
-- ✅ `lib/storage/learner-state.ts` : type `LearnerState`, clé `ai-training:state:v1`, `useLearnerState()` hook, helpers `markModuleComplete`, `setModuleProgress`, `setLastVisited`, `getParcoursProgress`.
-- ✅ **Critère d'acceptation** : types exportés, squelette du parcours 1 consommable, état persistant entre reloads.
+- âœ… `lib/content/types.ts` : types `Parcours`, `Module`, `ModuleSection`, `InteractiveWidget` (union exhaustive des 14 widgets du catalogue).
+- âœ… `lib/content/parcours/le-monde-de-l-ia.ts` : squelette Parcours 1, 3 modules (Ã‰volution & maturitÃ© / Iceberg / Acteurs), structure intro â†’ concept â†’ interactif â†’ exercice â†’ rÃ©cap, placeholders `TODO: [propriÃ©taire]`.
+- âœ… `lib/content/index.ts` : `allParcours`, `getParcours(slug)`, `getModule(parcoursSlug, moduleSlug)`.
+- âœ… `lib/storage/learner-state.ts` : type `LearnerState`, clÃ© `ai-training:state:v1`, `useLearnerState()` hook, helpers `markModuleComplete`, `setModuleProgress`, `setLastVisited`, `getParcoursProgress`.
+- âœ… **CritÃ¨re d'acceptation** : types exportÃ©s, squelette du parcours 1 consommable, Ã©tat persistant entre reloads.
 
-### Lot 2 — Landing publique + navigation ✅ livré et validé
+### Lot 2 â€” Landing publique + navigation âœ… livrÃ© et validÃ©
 
-- ✅ `app/page.tsx` : landing publique (hero, 3 promesses, aperçu parcours depuis `allParcours`, footer).
-- ✅ `app/formations/page.tsx` : placeholder `/formations` (grille des parcours, sera enrichi Lot 3).
-- ✅ Navbar refondre : logo → `/`, liens Formations · Annexes (dropdown `/prompts` + `/lab`) · Progression · À propos.
-- ✅ `components/learner/annexes-menu.tsx` : dropdown Client Component avec fermeture au clic extérieur.
-- ✅ Layout racine : une seule navbar, pas de sidebar globale.
-- ✅ **Critère d'acceptation** : `npm run build` ✅ · `npm run lint` ✅ · navigation `/` → `/formations` fonctionnelle.
+- âœ… `app/page.tsx` : landing publique (hero, 3 promesses, aperÃ§u parcours depuis `allParcours`, footer).
+- âœ… `app/formations/page.tsx` : placeholder `/formations` (grille des parcours, sera enrichi Lot 3).
+- âœ… Navbar refondre : logo â†’ `/`, liens Formations Â· Annexes (dropdown `/prompts` + `/lab`) Â· Progression Â· Ã€ propos.
+- âœ… `components/learner/annexes-menu.tsx` : dropdown Client Component avec fermeture au clic extÃ©rieur.
+- âœ… Layout racine : une seule navbar, pas de sidebar globale.
+- âœ… **CritÃ¨re d'acceptation** : `npm run build` âœ… Â· `npm run lint` âœ… Â· navigation `/` â†’ `/formations` fonctionnelle.
 
-### Lot 3 — Listing et détail parcours ✅ livré et validé
+### Lot 3 â€” Listing et dÃ©tail parcours âœ… livrÃ© et validÃ©
 
-- ✅ `app/formations/page.tsx` : grille depuis `allParcours` + progression injectée via `ParcoursGrid` (Client Component).
-- ✅ `components/formations/parcours-grid.tsx` : barre de progression thin + compteur modules si déjà commencé.
-- ✅ `app/formations/[parcoursSlug]/page.tsx` : async params, `notFound()` si slug inconnu, délègue à `ParcoursDetail`.
-- ✅ `components/formations/parcours-detail.tsx` : header (titre, niveau, durée), barre progression gradient, CTA Commencer/Reprendre/Revoir, liste modules avec icônes statut (Circle / PlayCircle / CheckCircle2) et badges.
-- ✅ `app/formations/[parcoursSlug]/[moduleSlug]/page.tsx` : placeholder fonctionnel (breadcrumb complet, lien retour).
-- Verrouillage séquentiel : non activé (accès libre), prévu optionnellement plus tard.
-- ✅ **Critère d'acceptation** : `npm run build` ✅ · `npm run lint` ✅ · navigation landing → formations → parcours → module fonctionnelle.
+- âœ… `app/formations/page.tsx` : grille depuis `allParcours` + progression injectÃ©e via `ParcoursGrid` (Client Component).
+- âœ… `components/formations/parcours-grid.tsx` : barre de progression thin + compteur modules si dÃ©jÃ  commencÃ©.
+- âœ… `app/formations/[parcoursSlug]/page.tsx` : async params, `notFound()` si slug inconnu, dÃ©lÃ¨gue Ã  `ParcoursDetail`.
+- âœ… `components/formations/parcours-detail.tsx` : header (titre, niveau, durÃ©e), barre progression gradient, CTA Commencer/Reprendre/Revoir, liste modules avec icÃ´nes statut (Circle / PlayCircle / CheckCircle2) et badges.
+- âœ… `app/formations/[parcoursSlug]/[moduleSlug]/page.tsx` : placeholder fonctionnel (breadcrumb complet, lien retour).
+- Verrouillage sÃ©quentiel : non activÃ© (accÃ¨s libre), prÃ©vu optionnellement plus tard.
+- âœ… **CritÃ¨re d'acceptation** : `npm run build` âœ… Â· `npm run lint` âœ… Â· navigation landing â†’ formations â†’ parcours â†’ module fonctionnelle.
 
-### Lot 4 — Écran module unifié
+### Lot 4 â€” Ã‰cran module unifiÃ©
 
-- Route `/formations/[parcoursSlug]/[moduleSlug]`, rendu basé sur l'array `sections`.
+- Route `/formations/[parcoursSlug]/[moduleSlug]`, rendu basÃ© sur l'array `sections`.
 - Composants de rendu dans `components/module/` :
   - `SectionIntro`, `SectionConcept`, `SectionInteractive`, `SectionExercise`, `SectionRecap`.
-- Barre de progression du module calculée sur la position de scroll / sections visitées (simple : dernière section atteinte).
-- Bouton final « Marquer comme terminé » → appelle `markModuleComplete` et propose le module suivant.
+- Barre de progression du module calculÃ©e sur la position de scroll / sections visitÃ©es (simple : derniÃ¨re section atteinte).
+- Bouton final Â« Marquer comme terminÃ© Â» â†’ appelle `markModuleComplete` et propose le module suivant.
 - Sidebar contextuelle droite : plan des sections du module + modules voisins.
-- **Critère d'acceptation** : un module fictif complet est traversable de bout en bout, état persisté.
+- **CritÃ¨re d'acceptation** : un module fictif complet est traversable de bout en bout, Ã©tat persistÃ©.
 
-### Lot 5 — Widgets interactifs (batch parcours 1)
+### Lot 5 â€” Widgets interactifs (batch parcours 1)
 
-- Poser l'interface d'enregistrement : un widget = un composant React + une entrée dans un registre typé (`components/module/widgets/registry.ts`).
-- Extraire le Lab existant vers `components/module/widgets/lab-funnel/` et l'exposer comme widget `lab-funnel`. L'écran `/lab` devient un simple wrapper réutilisant ce widget (la bibliothèque `/prompts` fait de même pour les templates).
-- Livrer les **widgets nécessaires au parcours 1** :
-  - `iceberg-explorer` : SVG cliquable des couches Applications / AI Deployment / AI Training / Data Center / Énergie, chaque couche révèle des exemples (acteurs, puces, datacenters, énergie).
-  - `timeline` : frise horizontale des innovations IA (reprend `learnerTimeline`, à rafraîchir), points cliquables.
-  - `hype-cycle` : courbe Gartner stylisée avec points (AGI, Agentic-AI, Gen-AI, IA classique), chaque point révèle une explication.
-- **Critère d'acceptation** : les 4 widgets (`lab-funnel`, `iceberg-explorer`, `timeline`, `hype-cycle`) sont consommables dans une section `interactive` depuis le contenu, et le parcours 1 est traversable bout en bout.
+- Poser l'interface d'enregistrement : un widget = un composant React + une entrÃ©e dans un registre typÃ© (`components/module/widgets/registry.ts`).
+- Extraire le Lab existant vers `components/module/widgets/lab-funnel/` et l'exposer comme widget `lab-funnel`. L'Ã©cran `/lab` devient un simple wrapper rÃ©utilisant ce widget (la bibliothÃ¨que `/prompts` fait de mÃªme pour les templates).
+- Livrer les **widgets nÃ©cessaires au parcours 1** :
+  - `iceberg-explorer` : SVG cliquable des couches Applications / AI Deployment / AI Training / Data Center / Ã‰nergie, chaque couche rÃ©vÃ¨le des exemples (acteurs, puces, datacenters, Ã©nergie).
+  - `timeline` : frise horizontale des innovations IA (reprend `learnerTimeline`, Ã  rafraÃ®chir), points cliquables.
+  - `hype-cycle` : courbe Gartner stylisÃ©e avec points (AGI, Agentic-AI, Gen-AI, IA classique), chaque point rÃ©vÃ¨le une explication.
+- **CritÃ¨re d'acceptation** : les 4 widgets (`lab-funnel`, `iceberg-explorer`, `timeline`, `hype-cycle`) sont consommables dans une section `interactive` depuis le contenu, et le parcours 1 est traversable bout en bout.
 
-### Lot 6 — Annexes
+### Lot 6 â€” Annexes
 
-- `/prompts` : bibliothèque de prompts basée sur `learnerPromptTemplates` actuels, avec filtre par catégorie / complexité / tags, bouton « copier ». Le contenu sera étendu au fil de l'eau.
-- `/lab` : wrapper autour du widget `lab-funnel` (déjà livré en Lot 5), page dédiée avec contexte explicatif plus large que dans le module.
-- **Critère d'acceptation** : les deux annexes sont accessibles depuis la navbar, fonctionnelles hors parcours.
+- `/prompts` : bibliothÃ¨que de prompts basÃ©e sur `learnerPromptTemplates` actuels, avec filtre par catÃ©gorie / complexitÃ© / tags, bouton Â« copier Â». Le contenu sera Ã©tendu au fil de l'eau.
+- `/lab` : wrapper autour du widget `lab-funnel` (dÃ©jÃ  livrÃ© en Lot 5), page dÃ©diÃ©e avec contexte explicatif plus large que dans le module.
+- **CritÃ¨re d'acceptation** : les deux annexes sont accessibles depuis la navbar, fonctionnelles hors parcours.
 
-### Lot 7 — Progression personnelle
+### Lot 7 â€” Progression personnelle
 
 - Page `/progression` simple :
-  - compteur « X / Y modules terminés »,
+  - compteur Â« X / Y modules terminÃ©s Â»,
   - barre de progression globale,
   - liste des modules avec statut et lien,
-  - bouton « Réinitialiser ma progression » (avec confirmation) effaçant `ai-training:state:v1`.
-- **Critère d'acceptation** : synchronisé avec ce que l'utilisateur a fait en Lot 4.
+  - bouton Â« RÃ©initialiser ma progression Â» (avec confirmation) effaÃ§ant `ai-training:state:v1`.
+- **CritÃ¨re d'acceptation** : synchronisÃ© avec ce que l'utilisateur a fait en Lot 4.
 
-### Lot 8 — Extension catalogue (parcours 2 → 4)
+### Lot 8 â€” Extension catalogue (parcours 2 â†’ 4)
 
-Chaque parcours est un incrément indépendant livrable, dans cet ordre :
+Chaque parcours est un incrÃ©ment indÃ©pendant livrable, dans cet ordre :
 
-- **Parcours 2 — Les LLM** : widgets `tokenizer-demo`, `lab-funnel` (déjà livré), `context-window`, `hallucination-spotter`.
-- **Parcours 3 — Anatomie d'un prompt** : widgets `prompt-builder`, `prompt-compare`. Réutilise la bibliothèque `/prompts` pour le module 3.
-- **Parcours 4 — Les outils avancés** : widgets `tool-call-simulator`, `rag-flow`, `mcp-diagram`, `agent-loop`.
+- **Parcours 2 â€” Les LLM** : widgets `tokenizer-demo`, `lab-funnel` (dÃ©jÃ  livrÃ©), `context-window`, `hallucination-spotter`.
+- **Parcours 3 â€” Anatomie d'un prompt** : widgets `prompt-builder`, `prompt-compare`. RÃ©utilise la bibliothÃ¨que `/prompts` pour le module 3.
+- **Parcours 4 â€” Les outils avancÃ©s** : widgets `tool-call-simulator`, `rag-flow`, `mcp-diagram`, `agent-loop`.
 
-Pour chaque parcours : création du fichier `lib/content/parcours/[slug].ts` squelette, livraison des widgets dédiés, rédaction du contenu par le propriétaire.
+Pour chaque parcours : crÃ©ation du fichier `lib/content/parcours/[slug].ts` squelette, livraison des widgets dÃ©diÃ©s, rÃ©daction du contenu par le propriÃ©taire.
 
-### Lot 9 — SEO et finition
+### Lot 9 â€” SEO et finition
 
-- Métadonnées par route via `export const metadata` :
+- MÃ©tadonnÃ©es par route via `export const metadata` :
   - `/` : titre, description, OG image (placeholder OK).
-  - `/formations` et `/formations/[slug]` : `generateMetadata` à partir du contenu.
-  - `/lab`, `/a-propos` : titres dédiés.
+  - `/formations` et `/formations/[slug]` : `generateMetadata` Ã  partir du contenu.
+  - `/lab`, `/a-propos` : titres dÃ©diÃ©s.
 - `app/sitemap.ts` : routes statiques + parcours/modules.
 - `app/robots.ts` : allow all.
-- Balises sémantiques (`<main>`, `<article>`, `<nav>`) et `aria-label` cohérents.
-- `lang="fr"` (déjà présent), vérifier contraste et focus visibles sur tous les boutons/links.
+- Balises sÃ©mantiques (`<main>`, `<article>`, `<nav>`) et `aria-label` cohÃ©rents.
+- `lang="fr"` (dÃ©jÃ  prÃ©sent), vÃ©rifier contraste et focus visibles sur tous les boutons/links.
 - Favicon + wordmark propres.
-- **Critère d'acceptation** : audit Lighthouse SEO ≥ 95, accessibilité ≥ 90.
+- **CritÃ¨re d'acceptation** : audit Lighthouse SEO â‰¥ 95, accessibilitÃ© â‰¥ 90.
 
-## 10. Hors scope (à noter pour plus tard)
+## 10. Hors scope (Ã  noter pour plus tard)
 
 - Authentification, multi-device sync, backend.
 - CMS ou MDX.
-- Appel à une API LLM réelle (tout reste déterministe côté client).
+- Appel Ã  une API LLM rÃ©elle (tout reste dÃ©terministe cÃ´tÃ© client).
 - i18n (FR uniquement).
 - Mode sombre.
-- Partage d'état via URL.
-- Tests automatisés (Vitest/Playwright) : non demandés, à rediscuter si le projet se stabilise.
+- Partage d'Ã©tat via URL.
+- Tests automatisÃ©s (Vitest/Playwright) : non demandÃ©s, Ã  rediscuter si le projet se stabilise.
 
-## 11. Ordre d'exécution recommandé
+## 11. Ordre d'exÃ©cution recommandÃ©
 
-Lot 0 → Lot 1 → Lot 2 → Lot 3 → Lot 4 → Lot 5 → Lot 6 → Lot 7 → Lot 8 → Lot 9.
+Lot 0 â†’ Lot 1 â†’ Lot 2 â†’ Lot 3 â†’ Lot 4 â†’ Lot 5 â†’ Lot 6 â†’ Lot 7 â†’ Lot 8 â†’ Lot 9.
 
-- Lots 0 à 5 : socle + parcours 1 bout en bout (cœur indispensable).
+- Lots 0 Ã  5 : socle + parcours 1 bout en bout (cÅ“ur indispensable).
 - Lot 6 : annexes accessibles.
 - Lot 7 : progression personnelle visible.
-- Lot 8 : extension du catalogue (parcours 2 à 4), incrémentale.
-- Lot 9 : SEO et finition, une fois le contenu stabilisé.
+- Lot 8 : extension du catalogue (parcours 2 Ã  4), incrÃ©mentale.
+- Lot 9 : SEO et finition, une fois le contenu stabilisÃ©.
 
 ## 12. Livrables par lot
 
-Pour chaque lot, le développeur produit :
+Pour chaque lot, le dÃ©veloppeur produit :
 
 - les modifications de code (routes, composants, types),
-- la mise à jour des documents impactés dans `docs/product/`,
+- la mise Ã  jour des documents impactÃ©s dans `docs/product/`,
 - une note courte dans le message de PR listant ce qui est fait et ce qui ne l'est pas.
+

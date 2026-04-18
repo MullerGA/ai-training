@@ -1,68 +1,59 @@
-# Modèle de Contenu — état Lot 0
+﻿# Modele de contenu - etat Lot 4
 
-## Contrats TypeScript actuels
+## Contrats TypeScript utilises
 
-Définis dans `lib/learner/types.ts` :
+Definis dans `lib/content/types.ts`:
 
 | Type | Usage |
 |---|---|
-| `LabScenario` | Scénarios du lab interactif |
-| `LabPrediction` | Token avec probabilité dans l'entonnoir |
-| `LabInputToken` | Tokenisation d'un mot dans un prompt |
-| `PromptTemplate` | Template de prompt (base `/prompts` — Lot 6) |
-| `TimelineMilestone` | Point de la frise chronologique IA (widget Lot 5) |
+| `Parcours` | Unite pedagogique complete (meta + modules) |
+| `Module` | Etape d'un parcours, composee de sections ordonnees |
+| `ModuleSection` | Union de sections `intro`, `concept`, `interactive`, `exercise`, `recap` |
+| `InteractiveWidget` | Union typee des widgets cibles du catalogue |
 
-## Données actuelles
+## Organisation des donnees
 
-Définies dans `lib/learner/data.ts` :
+- `lib/content/parcours/le-monde-de-l-ia.ts`: premier parcours avec modules squelette.
+- `lib/content/index.ts`:
+  - `allParcours`,
+  - `getParcours(slug)`,
+  - `getModule(parcoursSlug, moduleSlug)`.
 
-- `learnerLabScenarios` : 3 scénarios pour le lab (animal, voyage, recette).
-- `learnerTimeline` : frise 2018 → 2030 (base du widget timeline — Lot 5).
-- `learnerPromptTemplates` : 3 templates initiaux (base de `/prompts` — Lot 6).
+Le contenu pedagogique reste en placeholders `TODO: [proprietaire]`.
 
-## Modèle de contenu cible (Lot 1)
+## Rendu module (Lot 4)
 
-À créer dans `lib/content/` :
+La route `/formations/[parcoursSlug]/[moduleSlug]` rend les sections dans l'ordre de `module.sections`:
 
-```ts
-// lib/content/types.ts
-type Parcours = {
-  slug: string;
-  title: string;
-  tagline: string;
-  description: string;
-  level: "Débutant" | "Intermédiaire" | "Avancé";
-  estimatedMinutes: number;
-  modules: Module[];
-};
+1. `intro`
+2. `concept`
+3. `interactive`
+4. `exercise`
+5. `recap`
 
-type Module = {
-  slug: string;
-  index: number;
-  title: string;
-  summary: string;
-  estimatedMinutes: number;
-  sections: ModuleSection[];
-};
+Composants de rendu dedies dans `components/module/`:
 
-type ModuleSection =
-  | { kind: "intro"; title?: string; body: string }
-  | { kind: "concept"; title: string; body: string; keyPoints?: string[] }
-  | { kind: "interactive"; widget: InteractiveWidget }
-  | { kind: "exercise"; prompt: string; hints?: string[]; sampleAnswer?: string }
-  | { kind: "recap"; title: string; takeaways: string[] };
-```
+- `SectionIntro`
+- `SectionConcept`
+- `SectionInteractive`
+- `SectionExercise`
+- `SectionRecap`
 
-## Persistance locale (Lot 1)
+## Persistance locale
 
-À créer dans `lib/storage/learner-state.ts` :
+Definie dans `lib/storage/learner-state.ts`:
 
 ```ts
 type LearnerState = {
-  completedModules: string[];         // "${parcoursSlug}/${moduleSlug}"
-  moduleProgress: Record<string, number>; // 0..100
+  completedModules: string[];
+  moduleProgress: Record<string, number>;
   lastVisited?: { parcours: string; module: string };
 };
 ```
 
-Clé localStorage : `ai-training:state:v1`.
+- Cle localStorage: `ai-training:state:v1`.
+- Cle module: `${parcoursSlug}/${moduleSlug}`.
+- Dans l'ecran module (Lot 4):
+  - progression mise a jour via `setModuleProgress` en fonction de la derniere section atteinte,
+  - completion via `markModuleComplete`,
+  - reprise via `lastVisited`.
