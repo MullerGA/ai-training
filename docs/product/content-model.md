@@ -1,4 +1,4 @@
-﻿# Modele de contenu - etat Lot 4
+# Modele de contenu - etat Lot 5
 
 ## Contrats TypeScript utilises
 
@@ -21,7 +21,7 @@ Definis dans `lib/content/types.ts`:
 
 Le contenu pedagogique reste en placeholders `TODO: [proprietaire]`.
 
-## Rendu module (Lot 4)
+## Rendu module
 
 La route `/formations/[parcoursSlug]/[moduleSlug]` rend les sections dans l'ordre de `module.sections`:
 
@@ -39,6 +39,24 @@ Composants de rendu dedies dans `components/module/`:
 - `SectionExercise`
 - `SectionRecap`
 
+## Registre de widgets (Lot 5)
+
+Le rendu des sections `interactive` passe par un registre type:
+
+- `components/module/widgets/registry.ts`:
+  - `widgetRegistry` (metadonnees + fonction de rendu),
+  - `getWidgetDefinition(type)`,
+  - `renderWidget(widget, embedded)`.
+
+Widgets implementes dans le lot 5:
+
+- `lab-funnel` -> `components/module/widgets/lab-funnel/lab-funnel-widget.tsx`
+- `timeline` -> `components/module/widgets/timeline-widget.tsx`
+- `hype-cycle` -> `components/module/widgets/hype-cycle-widget.tsx`
+- `iceberg-explorer` -> `components/module/widgets/iceberg-explorer-widget.tsx`
+
+Les widgets non livres dans ce lot utilisent `WidgetPlaceholder`.
+
 ## Persistance locale
 
 Definie dans `lib/storage/learner-state.ts`:
@@ -53,7 +71,8 @@ type LearnerState = {
 
 - Cle localStorage: `ai-training:state:v1`.
 - Cle module: `${parcoursSlug}/${moduleSlug}`.
-- Dans l'ecran module (Lot 4):
+- Dans l'ecran module:
   - progression mise a jour via `setModuleProgress` en fonction de la derniere section atteinte,
   - completion via `markModuleComplete`,
   - reprise via `lastVisited`.
+

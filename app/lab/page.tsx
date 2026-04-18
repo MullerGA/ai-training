@@ -1,5 +1,5 @@
-﻿import { LabScreen } from "@/components/learner/screens/lab-screen";
+import { LabFunnelWidget } from "@/components/module/widgets/lab-funnel";
 
 export default function LabPage() {
-  return <LabScreen />;
+  return <LabFunnelWidget />;
 }

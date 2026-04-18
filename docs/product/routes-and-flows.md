@@ -1,4 +1,4 @@
-﻿# Routes et parcours - etat Lot 4
+# Routes et parcours - etat Lot 5
 
 ## Routes actives
 
@@ -7,8 +7,8 @@
 | `/` | Landing publique (hero, promesses, apercu parcours) |
 | `/formations` | Grille des parcours avec progression locale |
 | `/formations/[parcoursSlug]` | Detail parcours (header, progression, liste modules, CTA reprendre) |
-| `/formations/[parcoursSlug]/[moduleSlug]` | Ecran module unifie (sections, barre de progression, sidebar contextuelle, fin de module) |
-| `/lab` | Lab interactif autonome |
+| `/formations/[parcoursSlug]/[moduleSlug]` | Ecran module unifie (sections, progression, sidebar, widgets interactifs) |
+| `/lab` | Wrapper dedie autour du widget `lab-funnel` |
 | `/a-propos` | Presentation de l'application |
 | `/progression` | Suivi de progression (placeholder, lot 7) |
 
@@ -25,8 +25,19 @@
 3. `/formations/[parcoursSlug]` -> `/formations/[parcoursSlug]/[moduleSlug]`
 4. Dans le module:
    - progression calculee par derniere section atteinte,
+   - rendu des sections `interactive` via registre de widgets,
    - bouton final "Marquer comme termine",
    - navigation vers module precedent/suivant.
+
+## Lot 5 - widgets disponibles en route
+
+- Dans les modules:
+  - `timeline`
+  - `hype-cycle`
+  - `iceberg-explorer`
+  - `lab-funnel` (consommable par section interactive via le registre)
+- Sur la route annexe:
+  - `/lab` reutilise le meme composant `LabFunnelWidget`.
 
 ## Routes supprimees (Lot 0)
 
@@ -42,3 +53,4 @@
 | Route | Lot | Description |
 |---|---|---|
 | `/prompts` | Lot 6 | Bibliotheque de prompts reutilisables |
+

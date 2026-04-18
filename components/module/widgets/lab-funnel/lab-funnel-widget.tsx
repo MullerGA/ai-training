@@ -225,8 +225,14 @@ function DotLayer({ dots, color, layer }: DotLayerProps) {
   ));
 }
 
-export function LabScreen() {
-  const [scenarioId, setScenarioId] = useState(learnerLabScenarios[0].id);
+type LabFunnelWidgetProps = {
+  scenarioId?: string;
+  embedded?: boolean;
+};
+
+export function LabFunnelWidget({ scenarioId, embedded = false }: LabFunnelWidgetProps) {
+  const initialScenarioId = scenarioId ?? learnerLabScenarios[0]?.id ?? "";
+  const [currentScenarioId, setCurrentScenarioId] = useState(initialScenarioId);
   const [temperature, setTemperature] = useState(0.7);
   const [topK, setTopK] = useState(5);
   const [topP, setTopP] = useState(0.8);
@@ -236,7 +242,7 @@ export function LabScreen() {
   const spinTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const scenario =
-    learnerLabScenarios.find((entry) => entry.id === scenarioId) ?? learnerLabScenarios[0];
+    learnerLabScenarios.find((entry) => entry.id === currentScenarioId) ?? learnerLabScenarios[0];
 
   const funnel = useMemo(() => {
     return runFunnel(scenario.predictions, { temperature, topK, topP });
@@ -322,69 +328,83 @@ export function LabScreen() {
 
   return (
     <TooltipProvider>
-      <div className="w-full space-y-6 px-4 py-8 md:px-6 xl:px-8">
-        <section>
-          <div className="mb-2 flex items-center gap-2">
-            <Badge variant="info">Lab interactif</Badge>
-            <Badge variant="outline">Déterministe</Badge>
-          </div>
-          <div className="flex flex-wrap items-start justify-between gap-3">
-            <div>
-              <h1 className="page-title">Entonnoir de décision LLM</h1>
-              <p className="page-lead">
-                Explore l'impact de <strong>temperature</strong>, <strong>top-k</strong> et{" "}
-                <strong>top-p</strong> sur la distribution des tokens avec une visualisation guidée.
-              </p>
+      <div className={embedded ? "w-full space-y-6" : "w-full space-y-6 px-4 py-8 md:px-6 xl:px-8"}>
+        {embedded ? (
+          <section className="space-y-2">
+            <div className="flex items-center gap-2">
+              <Badge variant="info">Lab funnel</Badge>
+              <Badge variant="outline">Simulation locale</Badge>
             </div>
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button variant="outline" size="sm">
-                  En savoir plus <CircleHelp className="size-4" />
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="max-h-[86vh] overflow-y-auto">
-                <DialogHeader>
-                  <DialogTitle>L'entonnoir de décision LLM</DialogTitle>
-                  <DialogDescription>
-                    Ce lab montre comment les probabilités sont rééquilibrées puis filtrées avant le
-                    choix final d'un token.
-                  </DialogDescription>
-                </DialogHeader>
-                <div className="space-y-4 text-sm leading-relaxed text-[var(--slate-700)]">
-                  <section>
-                    <h3 className="font-semibold text-[var(--slate-900)]">Processus</h3>
-                    <p>
-                      1. La <strong>température</strong> rend la distribution plus créative ou plus
-                      conservatrice.
-                    </p>
-                    <p>
-                      2. <strong>Top-K</strong> conserve uniquement les K tokens les plus probables.
-                    </p>
-                    <p>
-                      3. <strong>Top-P</strong> conserve le plus petit ensemble couvrant la
-                      probabilité cumulée cible.
-                    </p>
-                  </section>
-                  <section>
-                    <h3 className="font-semibold text-[var(--slate-900)]">Lecture de l'écran</h3>
-                    <p>
-                      La colonne centrale affiche l'entonnoir, la légende indique le nombre de
-                      tokens restants à chaque étape, et la colonne de droite détaille les
-                      probabilités après chaque filtre.
-                    </p>
-                  </section>
-                  <section>
-                    <h3 className="font-semibold text-[var(--slate-900)]">Conseil pédagogique</h3>
-                    <p>
-                      Compare plusieurs scénarios avec les mêmes paramètres pour voir comment le
-                      contexte initial change la sélection finale.
-                    </p>
-                  </section>
-                </div>
-              </DialogContent>
-            </Dialog>
-          </div>
-        </section>
+            <p className="text-sm text-[var(--slate-600)]">
+              Manipule temperature, top-k et top-p pour observer l'impact sur les tokens.
+            </p>
+          </section>
+        ) : (
+          <section>
+            <div className="mb-2 flex items-center gap-2">
+              <Badge variant="info">Lab interactif</Badge>
+              <Badge variant="outline">Déterministe</Badge>
+            </div>
+            <div className="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <h1 className="page-title">Entonnoir de décision LLM</h1>
+                <p className="page-lead">
+                  Explore l'impact de <strong>temperature</strong>, <strong>top-k</strong> et{" "}
+                  <strong>top-p</strong> sur la distribution des tokens avec une visualisation
+                  guidée.
+                </p>
+              </div>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="outline" size="sm">
+                    En savoir plus <CircleHelp className="size-4" />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-h-[86vh] overflow-y-auto">
+                  <DialogHeader>
+                    <DialogTitle>L'entonnoir de décision LLM</DialogTitle>
+                    <DialogDescription>
+                      Ce lab montre comment les probabilités sont rééquilibrées puis filtrées avant
+                      le choix final d'un token.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="space-y-4 text-sm leading-relaxed text-[var(--slate-700)]">
+                    <section>
+                      <h3 className="font-semibold text-[var(--slate-900)]">Processus</h3>
+                      <p>
+                        1. La <strong>température</strong> rend la distribution plus créative ou
+                        plus conservatrice.
+                      </p>
+                      <p>
+                        2. <strong>Top-K</strong> conserve uniquement les K tokens les plus
+                        probables.
+                      </p>
+                      <p>
+                        3. <strong>Top-P</strong> conserve le plus petit ensemble couvrant la
+                        probabilité cumulée cible.
+                      </p>
+                    </section>
+                    <section>
+                      <h3 className="font-semibold text-[var(--slate-900)]">Lecture de l'écran</h3>
+                      <p>
+                        La colonne centrale affiche l'entonnoir, la légende indique le nombre de
+                        tokens restants à chaque étape, et la colonne de droite détaille les
+                        probabilités après chaque filtre.
+                      </p>
+                    </section>
+                    <section>
+                      <h3 className="font-semibold text-[var(--slate-900)]">Conseil pédagogique</h3>
+                      <p>
+                        Compare plusieurs scénarios avec les mêmes paramètres pour voir comment le
+                        contexte initial change la sélection finale.
+                      </p>
+                    </section>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </div>
+          </section>
+        )}
 
         <section className="grid gap-6 xl:grid-cols-[290px_1fr_320px]">
           <aside className="space-y-4">
@@ -396,7 +416,7 @@ export function LabScreen() {
                     key={entry.id}
                     variant={entry.id === scenario.id ? "default" : "outline"}
                     size="sm"
-                    onClick={() => setScenarioId(entry.id)}
+                    onClick={() => setCurrentScenarioId(entry.id)}
                   >
                     {entry.title}
                   </Button>
@@ -577,7 +597,7 @@ export function LabScreen() {
                 </TooltipContent>
               </Tooltip>
             </div>
-            <ScrollArea className="h-[820px] pr-3">
+            <ScrollArea className={embedded ? "h-[620px] pr-3" : "h-[820px] pr-3"}>
               <div className="space-y-3">
                 <FunnelStage
                   title={`Après température (${temperature.toFixed(2)})`}

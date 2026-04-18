@@ -1,7 +1,7 @@
 ﻿# Plan d'Ã©volution AI Training
 
 Date : 2026-04-18
-Statut : Lot 4 livré (en attente de validation propriétaire) (2026-04-18)
+Statut : Lot 5 livre (en attente de validation proprietaire) (2026-04-18)
 
 ## 1. Objectif
 

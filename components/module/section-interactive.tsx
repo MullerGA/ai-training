@@ -1,28 +1,14 @@
 import type { ModuleSection } from "@/lib/content/types";
+import { getWidgetDefinition, renderWidget } from "./widgets/registry";
+import { WidgetPlaceholder } from "./widgets/widget-placeholder";
 
 type SectionInteractiveProps = {
   section: Extract<ModuleSection, { kind: "interactive" }>;
 };
 
-const widgetNames: Record<SectionInteractiveProps["section"]["widget"]["type"], string> = {
-  timeline: "Frise chronologique",
-  "hype-cycle": "Hype cycle",
-  "iceberg-explorer": "Iceberg explorer",
-  "market-gallery": "Galerie acteurs",
-  "lab-funnel": "Lab funnel",
-  "tokenizer-demo": "Tokenizer demo",
-  "context-window": "Fenetre de contexte",
-  "hallucination-spotter": "Hallucination spotter",
-  "prompt-builder": "Prompt builder",
-  "prompt-compare": "Prompt compare",
-  "tool-call-simulator": "Tool call simulator",
-  "rag-flow": "RAG flow",
-  "mcp-diagram": "MCP diagram",
-  "agent-loop": "Agent loop",
-};
-
 export function SectionInteractive({ section }: SectionInteractiveProps) {
-  const widgetName = widgetNames[section.widget.type];
+  const definition = getWidgetDefinition(section.widget.type);
+  const widgetName = definition?.label ?? section.widget.type;
 
   return (
     <div className="panel-card p-6">
@@ -33,12 +19,11 @@ export function SectionInteractive({ section }: SectionInteractiveProps) {
         </span>
       </div>
       <div className="mt-4 rounded-lg border border-dashed border-[var(--slate-300)] bg-[var(--slate-50)] p-4">
-        <p className="text-sm font-medium text-[var(--slate-700)]">
-          Widget "{section.widget.type}" branche en Lot 5.
-        </p>
-        <p className="mt-1 text-xs text-[var(--slate-500)]">
-          Placeholder temporaire pour valider le rendu unifie du module.
-        </p>
+        {definition ? (
+          renderWidget(section.widget, true)
+        ) : (
+          <WidgetPlaceholder widgetType={section.widget.type} />
+        )}
       </div>
     </div>
   );
