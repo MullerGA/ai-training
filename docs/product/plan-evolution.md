@@ -1,7 +1,7 @@
-﻿# Plan d'Ã©volution AI Training
+# Plan d'Ã©volution AI Training
 
 Date : 2026-04-19
-Statut : Lot 6 livre (en attente de validation proprietaire) (2026-04-19)
+Statut : Lot 7 livre et valide (2026-04-19)
 
 ## 1. Objectif
 
@@ -287,8 +287,7 @@ Objectif : base propre avant d'ajouter quoi que ce soit.
 - `/lab` : wrapper autour du widget `lab-funnel` (dÃ©jÃ  livrÃ© en Lot 5), page dÃ©diÃ©e avec contexte explicatif plus large que dans le module.
 - **CritÃ¨re d'acceptation** : les deux annexes sont accessibles depuis la navbar, fonctionnelles hors parcours.
 
-### Lot 7 â€” Progression personnelle
-
+### Lot 7 - Progression personnelle ✅ livre et valide
 - Page `/progression` simple :
   - compteur Â« X / Y modules terminÃ©s Â»,
   - barre de progression globale,
@@ -346,4 +345,3 @@ Pour chaque lot, le dÃ©veloppeur produit :
 - les modifications de code (routes, composants, types),
 - la mise Ã  jour des documents impactÃ©s dans `docs/product/`,
 - une note courte dans le message de PR listant ce qui est fait et ce qui ne l'est pas.
-

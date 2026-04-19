@@ -6,7 +6,7 @@ const STORAGE_KEY = "ai-training:state:v1";
 
 export type LearnerState = {
   completedModules: string[]; // `${parcoursSlug}/${moduleSlug}`
-  moduleProgress: Record<string, number>; // 0..100, même clé
+  moduleProgress: Record<string, number>; // 0..100, mÃªme clÃ©
   lastVisited?: { parcours: string; module: string };
 };
 
@@ -30,11 +30,11 @@ function saveState(state: LearnerState): void {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   } catch {
-    // localStorage peut être bloqué (mode privé strict, quota dépassé)
+    // localStorage peut Ãªtre bloquÃ© (mode privÃ© strict, quota dÃ©passÃ©)
   }
 }
 
-// Calcule le % de modules complétés dans un parcours donné.
+// Calcule le % de modules complÃ©tÃ©s dans un parcours donnÃ©.
 export function getParcoursProgress(
   state: LearnerState,
   parcoursSlug: string,
@@ -87,5 +87,14 @@ export function useLearnerState() {
     });
   }, []);
 
-  return { state, markModuleComplete, setModuleProgress, setLastVisited };
+  const resetState = useCallback(() => {
+    setState(DEFAULT_STATE);
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch {
+      // localStorage peut etre bloque (mode prive strict, quota depasse)
+    }
+  }, []);
+
+  return { state, markModuleComplete, setModuleProgress, setLastVisited, resetState };
 }

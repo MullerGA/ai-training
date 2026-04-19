@@ -1,4 +1,4 @@
-﻿# Architecture applicative - etat Lot 6
+# Architecture applicative - etat Lot 7
 
 ## Vue d'ensemble
 
@@ -27,7 +27,7 @@ L'etat apprenant est persiste en localStorage via `useLearnerState()`.
 - `app/prompts/page.tsx`: annexe bibliotheque de prompts.
 - `app/lab/page.tsx`: wrapper autour du widget `LabFunnelWidget` avec contexte dedie.
 - `app/a-propos/page.tsx`: page A propos.
-- `app/progression/page.tsx`: progression (placeholder).
+- `app/progression/page.tsx`: progression personnelle (compteur, barre globale, liste statuts, reset).
 
 ## Ecran module
 
@@ -38,6 +38,16 @@ L'etat apprenant est persiste en localStorage via `useLearnerState()`.
   - action finale `markModuleComplete`,
   - sidebar: plan de sections + modules voisins.
 - `components/module/section-*.tsx`: rendu dedie pour `intro`, `concept`, `interactive`, `exercise`, `recap`.
+
+## Progression personnelle (Lot 7)
+
+- `components/learner/screens/progression-screen.tsx`:
+  - agrege tous les modules depuis `allParcours`,
+  - calcule le ratio global `X / Y` et le pourcentage global,
+  - derive un statut par module (`termine`, `en cours`, `non commence`),
+  - fournit une action de reset avec confirmation utilisateur.
+- `lib/storage/learner-state.ts`:
+  - expose `resetState()` dans `useLearnerState()` pour remettre l'etat a zero et supprimer `ai-training:state:v1`.
 
 ## Architecture widgets (livree en Lot 5)
 
@@ -64,4 +74,3 @@ L'etat apprenant est persiste en localStorage via `useLearnerState()`.
 - `app/lab/page.tsx`:
   - ajoute le contexte pedagogique annexe,
   - embarque `LabFunnelWidget` en mode compose.
-

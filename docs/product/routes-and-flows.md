@@ -1,4 +1,4 @@
-﻿# Routes et parcours - etat Lot 6
+# Routes et parcours - etat Lot 7
 
 ## Routes actives
 
@@ -11,7 +11,7 @@
 | `/prompts` | Bibliotheque de prompts avec filtres et copie |
 | `/lab` | Wrapper dedie autour du widget `lab-funnel` |
 | `/a-propos` | Presentation de l'application |
-| `/progression` | Suivi de progression (placeholder, lot 7) |
+| `/progression` | Suivi de progression personnelle (compteur, barre globale, liste statuts, reset local) |
 
 ## Navigation principale
 
@@ -59,3 +59,10 @@
   - wrapper dedie avec contexte explicatif,
   - reutilise le composant `LabFunnelWidget` du registre de widgets.
 
+## Lot 7 - progression personnelle
+
+- `/progression`:
+  - affiche le compteur global `X / Y modules termines`,
+  - affiche une barre de progression globale calculee depuis les modules completes,
+  - liste tous les modules avec statut (`termine` / `en cours` / `non commence`) et lien direct,
+  - propose une action "Reinitialiser ma progression" avec confirmation, qui efface `ai-training:state:v1`.
