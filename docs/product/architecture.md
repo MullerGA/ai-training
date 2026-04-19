@@ -1,4 +1,4 @@
-# Architecture applicative - etat Lot 5
+﻿# Architecture applicative - etat Lot 6
 
 ## Vue d'ensemble
 
@@ -24,7 +24,8 @@ L'etat apprenant est persiste en localStorage via `useLearnerState()`.
 - `app/formations/page.tsx`: listing parcours.
 - `app/formations/[parcoursSlug]/page.tsx`: detail d'un parcours.
 - `app/formations/[parcoursSlug]/[moduleSlug]/page.tsx`: ecran module unifie.
-- `app/lab/page.tsx`: wrapper autour du widget `LabFunnelWidget`.
+- `app/prompts/page.tsx`: annexe bibliotheque de prompts.
+- `app/lab/page.tsx`: wrapper autour du widget `LabFunnelWidget` avec contexte dedie.
 - `app/a-propos/page.tsx`: page A propos.
 - `app/progression/page.tsx`: progression (placeholder).
 
@@ -38,7 +39,7 @@ L'etat apprenant est persiste en localStorage via `useLearnerState()`.
   - sidebar: plan de sections + modules voisins.
 - `components/module/section-*.tsx`: rendu dedie pour `intro`, `concept`, `interactive`, `exercise`, `recap`.
 
-## Architecture widgets (Lot 5)
+## Architecture widgets (livree en Lot 5)
 
 - `components/module/widgets/registry.ts`:
   - registre type des widgets exposes,
@@ -53,4 +54,14 @@ L'etat apprenant est persiste en localStorage via `useLearnerState()`.
   `components/module/widgets/hype-cycle-widget.tsx`,
   `components/module/widgets/iceberg-explorer-widget.tsx`:
   - widgets interactifs du batch parcours 1.
+
+## Annexes (Lot 6)
+
+- `components/prompts/prompt-library.tsx`:
+  - consomme `learnerPromptTemplates`,
+  - applique les filtres categorie / complexite / tags,
+  - expose l'action de copie par template.
+- `app/lab/page.tsx`:
+  - ajoute le contexte pedagogique annexe,
+  - embarque `LabFunnelWidget` en mode compose.
 

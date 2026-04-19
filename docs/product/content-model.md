@@ -1,4 +1,4 @@
-# Modele de contenu - etat Lot 5
+﻿# Modele de contenu - etat Lot 6
 
 ## Contrats TypeScript utilises
 
@@ -39,7 +39,7 @@ Composants de rendu dedies dans `components/module/`:
 - `SectionExercise`
 - `SectionRecap`
 
-## Registre de widgets (Lot 5)
+## Registre de widgets (livre en Lot 5)
 
 Le rendu des sections `interactive` passe par un registre type:
 
@@ -75,4 +75,11 @@ type LearnerState = {
   - progression mise a jour via `setModuleProgress` en fonction de la derniere section atteinte,
   - completion via `markModuleComplete`,
   - reprise via `lastVisited`.
+
+## Annexes de contenu (Lot 6)
+
+- Bibliotheque `/prompts`:
+  - source: `lib/learner/data.ts` -> `learnerPromptTemplates`,
+  - type source: `PromptTemplate` (`lib/learner/types.ts`),
+  - capacites UI: filtrage par categorie / complexite / tags, copie du prompt.
 

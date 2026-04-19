@@ -1,4 +1,4 @@
-# Routes et parcours - etat Lot 5
+﻿# Routes et parcours - etat Lot 6
 
 ## Routes actives
 
@@ -8,6 +8,7 @@
 | `/formations` | Grille des parcours avec progression locale |
 | `/formations/[parcoursSlug]` | Detail parcours (header, progression, liste modules, CTA reprendre) |
 | `/formations/[parcoursSlug]/[moduleSlug]` | Ecran module unifie (sections, progression, sidebar, widgets interactifs) |
+| `/prompts` | Bibliotheque de prompts avec filtres et copie |
 | `/lab` | Wrapper dedie autour du widget `lab-funnel` |
 | `/a-propos` | Presentation de l'application |
 | `/progression` | Suivi de progression (placeholder, lot 7) |
@@ -29,7 +30,7 @@
    - bouton final "Marquer comme termine",
    - navigation vers module precedent/suivant.
 
-## Lot 5 - widgets disponibles en route
+## Widgets disponibles en route (livres en Lot 5)
 
 - Dans les modules:
   - `timeline`
@@ -48,9 +49,13 @@
 - `/learner/exercice`
 - `/learner/diagrammes`
 
-## Routes prevues ensuite
+## Lot 6 - annexes disponibles
 
-| Route | Lot | Description |
-|---|---|---|
-| `/prompts` | Lot 6 | Bibliotheque de prompts reutilisables |
+- `/prompts`:
+  - source: `learnerPromptTemplates`,
+  - filtres: categorie, complexite, tag,
+  - action: copie du template dans le presse-papiers.
+- `/lab`:
+  - wrapper dedie avec contexte explicatif,
+  - reutilise le composant `LabFunnelWidget` du registre de widgets.
 

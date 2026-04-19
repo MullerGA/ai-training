@@ -1,7 +1,7 @@
 ﻿# Plan d'Ã©volution AI Training
 
-Date : 2026-04-18
-Statut : Lot 5 livre (en attente de validation proprietaire) (2026-04-18)
+Date : 2026-04-19
+Statut : Lot 6 livre (en attente de validation proprietaire) (2026-04-19)
 
 ## 1. Objectif
 
@@ -281,7 +281,7 @@ Objectif : base propre avant d'ajouter quoi que ce soit.
   - `hype-cycle` : courbe Gartner stylisÃ©e avec points (AGI, Agentic-AI, Gen-AI, IA classique), chaque point rÃ©vÃ¨le une explication.
 - **CritÃ¨re d'acceptation** : les 4 widgets (`lab-funnel`, `iceberg-explorer`, `timeline`, `hype-cycle`) sont consommables dans une section `interactive` depuis le contenu, et le parcours 1 est traversable bout en bout.
 
-### Lot 6 â€” Annexes
+### Lot 6 â€” Annexes âœ… livrÃ© (en attente de validation)
 
 - `/prompts` : bibliothÃ¨que de prompts basÃ©e sur `learnerPromptTemplates` actuels, avec filtre par catÃ©gorie / complexitÃ© / tags, bouton Â« copier Â». Le contenu sera Ã©tendu au fil de l'eau.
 - `/lab` : wrapper autour du widget `lab-funnel` (dÃ©jÃ  livrÃ© en Lot 5), page dÃ©diÃ©e avec contexte explicatif plus large que dans le module.

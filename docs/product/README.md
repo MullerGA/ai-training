@@ -1,5 +1,11 @@
 ﻿# Vue d'ensemble Produit
 
+## Suivi d'avancement
+
+- Date de mise a jour: 2026-04-19
+- Statut global: Lot 6 livre (en attente de validation proprietaire)
+- Prochain lot cible: Lot 7 (Progression personnelle), apres validation du lot 6
+
 ## Positionnement
 
 AI TRAINING est une application de formation IA centrée sur le parcours apprenant. Elle propose une navigation claire par étapes: découverte, apprentissage, pratique, suivi de progression.
@@ -31,3 +37,4 @@ AI TRAINING est une application de formation IA centrée sur le parcours apprena
 - [Système UI](./ui-system.md)
 - [Modèle de contenu](./content-model.md)
 - [Audit de migration](./migration-audit.md)
+
